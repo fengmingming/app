@@ -1,4 +1,5 @@
 <resources>
     <dimen name="margin_top">5dp</dimen>
     <dimen name="img_l">75dp</dimen>
+    <dimen name="index_loop_height">150dp</dimen>
 </resources>
