@@ -8,12 +8,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+
+import java.util.Map;
+
 /**
  * Created by on 2015/7/5.
  */
 public class GoodsFragment extends Fragment{
 
     private String url;
+    private Map param;
+
+    public Map getParam() {
+        return param;
+    }
+
+    public void setParam(Map param) {
+        this.param = param;
+    }
+
     private LinearLayout goodsList;
 
     public GoodsFragment(){
@@ -39,6 +54,12 @@ public class GoodsFragment extends Fragment{
         if(this.url != null){
             this.goodsList = (LinearLayout)getActivity().findViewById(R.id.goodsList);
         }
+    }
+
+    protected void render(){
+        AsyncHttpClient ac = new AsyncHttpClient();
+        RequestParams rp = new RequestParams();
+
     }
 
     @Override
