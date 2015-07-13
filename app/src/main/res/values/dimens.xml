@@ -1,5 +1,8 @@
 <resources>
     <dimen name="margin_top">5dp</dimen>
-    <dimen name="img_l">75dp</dimen>
+    <dimen name="img_l">55dp</dimen>
+    <dimen name="marginleft_index2">26dp</dimen>
     <dimen name="index_loop_height">150dp</dimen>
+    <dimen name="goods_width">50dp</dimen>
+    <dimen name="goods_height">50dp</dimen>
 </resources>

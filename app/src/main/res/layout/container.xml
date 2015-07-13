@@ -1,64 +1,74 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_weight="1">
-
-   <android.support.v4.view.ViewPager
-        android:id="@+id/index_loops"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/index_loop_height" >
-    </android.support.v4.view.ViewPager>
-
+    android:layout_height="match_parent"
+    android:fadingEdge="vertical"
+    android:layout_weight="1"
+    android:id="@+id/index_scroll">
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:layout_marginTop="@dimen/margin_top">
-        <ImageButton
-            android:id="@+id/index_category_btn"
-            android:layout_width="@dimen/img_l"
-            android:layout_height="@dimen/img_l"
-            android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+       <android.support.v4.view.ViewPager
+            android:id="@+id/index_loops"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/index_loop_height" >
+        </android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
             android:background="@color/white"
-            android:src="@drawable/img_category"/>
-        <ImageButton
-            android:id="@+id/index_goodsok_btn"
-            android:layout_width="@dimen/img_l"
-            android:layout_height="@dimen/img_l"
+            android:layout_marginTop="@dimen/margin_top">
+            <ImageButton
+                android:id="@+id/index_category_btn"
+                android:layout_width="@dimen/img_l"
+                android:layout_height="@dimen/img_l"
+                android:layout_marginLeft="@dimen/marginleft_index2"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="@color/white"
+                android:src="@drawable/img_category"/>
+            <ImageButton
+                android:id="@+id/index_goodsok_btn"
+                android:layout_width="@dimen/img_l"
+                android:layout_height="@dimen/img_l"
+                android:layout_marginLeft="@dimen/marginleft_index2"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="@color/white"
+                android:src="@drawable/img_goods_ok"/>
+            <ImageButton
+                android:id="@+id/index_cart_btn"
+                android:layout_width="@dimen/img_l"
+                android:layout_height="@dimen/img_l"
+                android:layout_marginLeft="@dimen/marginleft_index2"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="@color/white"
+                android:src="@drawable/img_cart"/>
+            <ImageButton
+                android:id="@+id/index_mycenter_btn"
+                android:layout_width="@dimen/img_l"
+                android:layout_height="@dimen/img_l"
+                android:layout_marginLeft="@dimen/marginleft_index2"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="@color/white"
+                android:src="@drawable/img_mycenter"/>
+        </LinearLayout>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/index_goods"
             android:layout_weight="1"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:background="@color/white"
-            android:src="@drawable/img_goods_ok"/>
-        <ImageButton
-            android:id="@+id/index_cart_btn"
-            android:layout_width="@dimen/img_l"
-            android:layout_height="@dimen/img_l"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:background="@color/white"
-            android:src="@drawable/img_cart"/>
-        <ImageButton
-            android:id="@+id/index_mycenter_btn"
-            android:layout_width="@dimen/img_l"
-            android:layout_height="@dimen/img_l"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:background="@color/white"
-            android:src="@drawable/img_mycenter"/>
+            android:name="com.app.GoodsFragment"/>
     </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>
 
