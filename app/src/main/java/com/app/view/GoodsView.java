@@ -2,7 +2,6 @@ package com.app.view;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.media.Image;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import com.app.commons.Utils;
 import java.util.List;
 
 /**
- * Created by sls-30 on 2015/7/10.
+ * Created by on 2015/7/10.
  */
 public class GoodsView extends LinearLayout{
 
@@ -48,9 +47,9 @@ public class GoodsView extends LinearLayout{
             this.setOrientation(HORIZONTAL);
             this.setGravity(Gravity.BOTTOM);
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
-            lp.setMargins(5,5,5,5);
+            lp.setMargins(0,1,0,1);
             this.setLayoutParams(lp);
-            this.setBackgroundColor(getResources().getColor(R.color.white));
+            this.setBackgroundResource(R.drawable.default_border);
         }
 
         public void builder(Goods g){
@@ -83,7 +82,6 @@ public class GoodsView extends LinearLayout{
             ll.addView(ll2);
             this.addView(iv);
             this.addView(ll);
-
         }
     }
 

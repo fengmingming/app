@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.app.commons.ReScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fadingEdge="vertical"
@@ -63,6 +63,14 @@
                 android:background="@color/white"
                 android:src="@drawable/img_mycenter"/>
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/everyday_recomment"
+            android:textColor="@color/orange"
+            android:layout_gravity="left"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/default_margin" />
         <fragment
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,5 +78,5 @@
             android:layout_weight="1"
             android:name="com.app.GoodsFragment"/>
     </LinearLayout>
-</ScrollView>
+</com.app.commons.ReScrollView>
 

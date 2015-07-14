@@ -1,16 +1,22 @@
 package com.app;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 
+import com.app.activity.WebActivity;
 import com.app.adapter.LoopImgsAdapter;
 import com.app.commons.Constants;
+import com.app.commons.ReScrollView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,21 +39,32 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.container, container, false);
+        //分页加载
         final GoodsFragment gf = (GoodsFragment)getFragmentManager().findFragmentById(R.id.index_goods);
         gf.setUrl(Constants.URL_INDEX_FLOOR);
-        Map map = new HashMap();
+        final Map map = new HashMap();
         map.put("type",8);
         map.put("currPage",currPage);
         map.put("num", 4);
         gf.setParam(map);
-        ScrollView sv = (ScrollView)view.findViewById(R.id.index_scroll);
-        sv.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+        ReScrollView sv = (ReScrollView)view.findViewById(R.id.index_scroll);
+        sv.setScrollChangeEvent(new ReScrollView.ScrollChangeEvent() {
             @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                if(bottom == 0&&!gf.getLoadState()){
-                    gf.getParam().put("currPage", ++currPage);
-                    gf.builder();
-                }
+            public void onScrollChanged() {
+                map.put("currPage",++currPage);
+                gf.builder();
+            }
+        });
+
+        //事件处理
+        ImageButton category = (ImageButton)view.findViewById(R.id.index_category_btn);
+        category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), WebActivity.class);
+                intent.putExtra("url",Constants.URL_CATEGORY);
+                startActivity(intent);
             }
         });
         return view;

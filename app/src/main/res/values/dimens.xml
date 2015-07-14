@@ -1,5 +1,6 @@
 <resources>
     <dimen name="margin_top">5dp</dimen>
+    <dimen name="default_margin">5dp</dimen>
     <dimen name="img_l">55dp</dimen>
     <dimen name="marginleft_index2">26dp</dimen>
     <dimen name="index_loop_height">150dp</dimen>
