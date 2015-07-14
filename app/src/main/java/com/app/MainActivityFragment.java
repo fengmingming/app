@@ -17,6 +17,13 @@ import com.app.activity.WebActivity;
 import com.app.adapter.LoopImgsAdapter;
 import com.app.commons.Constants;
 import com.app.commons.ReScrollView;
+import com.app.commons.Utils;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,8 +36,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class MainActivityFragment extends Fragment {
 
-    private ViewPager vp;
-    private List<ImageView> imgs = new ArrayList<ImageView>();
     private volatile int currPage = 1;
     public MainActivityFragment() {
     }
@@ -43,9 +48,9 @@ public class MainActivityFragment extends Fragment {
         final GoodsFragment gf = (GoodsFragment)getFragmentManager().findFragmentById(R.id.index_goods);
         gf.setUrl(Constants.URL_INDEX_FLOOR);
         final Map map = new HashMap();
-        map.put("type",8);
+        map.put("type", 0);
         map.put("currPage",currPage);
-        map.put("num", 4);
+        map.put("num", 10);
         gf.setParam(map);
         ReScrollView sv = (ReScrollView)view.findViewById(R.id.index_scroll);
         sv.setScrollChangeEvent(new ReScrollView.ScrollChangeEvent() {
@@ -67,6 +72,41 @@ public class MainActivityFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(Constants.URL_INDEX_LOOP, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                super.onSuccess(statusCode, headers, res);
+                try{
+                    if(statusCode == 200&&res.getBoolean("success")){
+                        JSONArray list = res.getJSONArray("result");
+                        if(list.length() > 0){
+                            ViewPager vp = (ViewPager)getActivity().findViewById(R.id.index_loops);
+                            List<ImageView> imgs = new ArrayList<ImageView>(list.length());
+                            for(int i=0,j=list.length();i<j;i++) {
+                                JSONObject jo = list.getJSONObject(i);
+                                ImageView iv = new ImageView(getActivity());
+                                imgs.add(iv);
+                                Utils.ayncLoadInternetImageView(iv,Constants.URL_IMAGE+jo.getString("imgUrl"));
+                                String url = jo.getString("url");
+                                if(url != null){
+                                    iv.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                        }
+                                    });
+                                }
+                            }
+                            vp.setAdapter(new LoopImgsAdapter(imgs));
+                        }
+                    }
+                }catch(Exception e){
+                    Log.e(MainActivityFragment.class.getName(),e.getMessage(),e);
+                }
+            }
+        });
         return view;
     }
 
@@ -75,16 +115,6 @@ public class MainActivityFragment extends Fragment {
         super.onStart();
         GoodsFragment gf = (GoodsFragment)getFragmentManager().findFragmentById(R.id.index_goods);
         gf.builder();
-        if(this.imgs.size() == 0){
-            vp = (ViewPager)getActivity().findViewById(R.id.index_loops);
-            ImageView iv1 = new ImageView(getActivity());
-            iv1.setBackgroundResource(R.drawable.default_loop);
-            ImageView iv2 = new ImageView(getActivity());
-            iv2.setBackgroundResource(R.drawable.default_loop2);
-            this.imgs.add(iv1);
-            this.imgs.add(iv2);
-            vp.setAdapter(new LoopImgsAdapter(this.imgs));
-        }
     }
 
 }
