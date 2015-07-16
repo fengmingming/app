@@ -3,11 +3,15 @@ package com.app;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.app.commons.Constants;
+import com.app.commons.Utils;
+import com.app.interfaces.IGoodsCom;
 import com.app.view.GoodsView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -20,40 +24,32 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by on 2015/7/5.
  */
-public class GoodsFragment extends Fragment{
-
-    private String url;
-    private Map param;
+public class GoodsFragment extends Fragment implements IGoodsCom{
 
     private final AtomicBoolean loadState = new AtomicBoolean(false);
 
-    public Map getParam() {
-        return param;
-    }
+    private GoodsView gv;
 
-    public void setParam(Map param) {
-        this.param = param;
-    }
+    private Config config;
 
-    private GoodsView goodsList;
+    private ParseJsonToGoods handler;
 
     public GoodsFragment(){
     }
 
-    public void setUrl(String url){
-        this.url = url;
+    @Override
+    public void parseJsonToGoods(ParseJsonToGoods parseJsonToGoods){
+        this.handler = parseJsonToGoods;
     }
 
-    public String getUrl(){
-        return url;
-    }
-
-    public boolean getLoadState() {
+    @Override
+    public boolean isLoading() {
         return loadState.get();
     }
 
@@ -61,69 +57,81 @@ public class GoodsFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.goods, container, false);
-        this.goodsList = (GoodsView) view.findViewById(R.id.goodsList);
+        this.gv = (GoodsView) view.findViewById(R.id.goodsList);
         return view;
     }
 
+    @Override
     public void builder(){
-        if(this.url != null){
+        if(config != null && !loadState.get()){
             render();
         }
     }
 
-    protected void render(){
+    private void render(){
         loadState.set(true);
-        AsyncHttpClient ac = new AsyncHttpClient();
-        RequestParams rp = new RequestParams();
-        if(param != null){
-            for(Object key : param.keySet()){
-                if(key != null&&param.get(key)!=null){
-                    rp.add(key.toString(),param.get(key).toString());
-                }
-            }
-        }
-        ac.post(this.url,rp,new JsonHttpResponseHandler(){
+        Utils.asyncHttpRequestGet(config.getUrl(), config.getParam(), new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);
                 if(statusCode == 200){
                     try{
-                        if(res.getBoolean("success")){
-                            JSONObject result = res.getJSONObject("result");
-                            if(result != null){
-                                JSONArray gsList = result.getJSONArray("entry");
-                                if(gsList != null&&gsList.length()>0){
-                                    List<GoodsView.Goods> gs = new ArrayList<GoodsView.Goods>();
-                                    for(int i=0;i<gsList.length();i++){
-                                        JSONObject go = gsList.getJSONObject(i);
-                                        GoodsView.Goods g = new GoodsView.Goods();
-                                        g.setGdurl(Constants.URL_GOODS_DETAIL+go.getString("id"));
-                                        g.setGid(go.getLong("id"));
-                                        g.setGname(go.getString("goodsName"));
-                                        g.setIurl(go.getString("photoUrl"));
-                                        g.setRemark(go.getString("remark"));
-                                        g.setMprice(go.getString("marketPrice"));
-                                        g.setPrice(go.getString("price"));
-                                        gs.add(g);
-                                    }
-                                    goodsList.builder(gs);
-                                }
+                        if(handler != null){
+                            List<GoodsView.Goods> gs = handler.parse(res);
+                            if(gs != null && gs.size() > 0){
+                                gv.builder(gs);
+                            }else{
+                                delayedChangeState(2000);
+                                return ;
                             }
                         }
                     }catch(Exception e){
-                        e.printStackTrace();
+                        Log.e(GoodsFragment.class.getName(),e.getMessage(),e);
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    Toast.makeText(getActivity(), "网络异常:" + String.valueOf(statusCode), Toast.LENGTH_SHORT).show();
                 }
+                delayedChangeState(1000);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject errorResponse){
                 loadState.set(false);
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void delayedChangeState(long mills){
+        getView().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadState.set(false);
+            }
+        }, mills);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(this.goodsList != null){
-            this.goodsList.removeAllViews();
+        reset();
+    }
+
+    @Override
+    public void reset(){
+        if(this.gv != null){
+            this.gv.removeAllViews();
         }
+    }
+
+    @Override
+    public void setConfig(Config config) {
+        this.config = config;
+    }
+
+    @Override
+    public Config getConfig() {
+        return this.config;
     }
 }

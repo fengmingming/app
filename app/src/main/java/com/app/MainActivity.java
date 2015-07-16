@@ -31,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
                 .memoryCacheSize(2 * 1024 * 1024)
-                .memoryCacheSizePercentage(13) // default
-                .diskCache(new UnlimitedDiscCache(cacheDir)) // default
-                .diskCacheSize(50 * 1024 * 1024)
-                .diskCacheFileCount(100)
-                .diskCacheFileNameGenerator(new HashCodeFileNameGenerator()) // default
-                .imageDownloader(new BaseImageDownloader(this)) // default
-                .imageDecoder(new BaseImageDecoder(false)) // default
-                .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
+                .memoryCacheSizePercentage(13)
+                .diskCache(new UnlimitedDiscCache(cacheDir))
+                .diskCacheSize(200 * 1024 * 1024)
+                .diskCacheFileCount(200)
+                .diskCacheFileNameGenerator(new HashCodeFileNameGenerator())
+                .imageDownloader(new BaseImageDownloader(this))
+                .imageDecoder(new BaseImageDecoder(false))
+                .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
                 .writeDebugLogs()
                 .build();
         ImageLoader.getInstance().init(config);

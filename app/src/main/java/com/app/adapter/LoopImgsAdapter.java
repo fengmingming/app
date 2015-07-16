@@ -19,7 +19,7 @@ public class LoopImgsAdapter extends PagerAdapter{
 
     @Override
     public int getCount() {
-        return list.size();
+        return this.list.size();
     }
 
     @Override
