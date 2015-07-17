@@ -54,7 +54,6 @@
                 android:singleLine="true"
                 android:numeric="integer"
                 android:gravity="center_vertical"
-                android:
                 android:minWidth="100dp"
                 android:layout_marginRight="@dimen/default_padding"
                 android:layout_marginLeft="@dimen/default_padding"
