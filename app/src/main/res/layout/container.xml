@@ -20,53 +20,91 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/img_l"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="center"
                 android:background="@color/white"
                 android:layout_marginTop="@dimen/margin_top"
                 android:paddingTop="@dimen/padding_top"
                 android:paddingBottom="@dimen/padding_bottom">
-                <ImageButton
-                    android:id="@+id/index_category_btn"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:background="@color/white"
-                    android:src="@drawable/img_category"/>
-                <ImageButton
-                    android:id="@+id/index_goodsok_btn"
-                    android:layout_width="wrap_content"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/index_category_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        android:background="@color/white"
+                        android:src="@drawable/index"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/indexT"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:background="@color/white"
-                    android:src="@drawable/img_goods_ok"/>
-                <ImageButton
-                    android:id="@+id/index_cart_btn"
-                    android:layout_width="wrap_content"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/index_goodsok_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        android:background="@color/white"
+                        android:src="@drawable/category"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/categoryT"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:background="@color/white"
-                    android:src="@drawable/img_cart"/>
-                <ImageButton
-                    android:id="@+id/index_mycenter_btn"
-                    android:layout_width="wrap_content"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/index_cart_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        android:background="@color/white"
+                        android:src="@drawable/cart"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cartT"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:background="@color/white"
-                    android:src="@drawable/img_mycenter"/>
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/index_mycenter_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        android:background="@color/white"
+                        android:src="@drawable/mycenter"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/myT"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"

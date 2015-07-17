@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.app.commons.ReScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/gdetail_title"
+            android:name="com.app.Title"/>
+        <android.support.v4.widget.SwipeRefreshLayout android:layout_width="match_parent" android:layout_height="match_parent" android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!--<ViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </ViewPager>-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+                <WebView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/gdetail_info"/>
+            </LinearLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/red">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:maxHeight="@dimen/btn_sm_height"
+                android:maxWidth="@dimen/btn_sm_width"
+                android:text="@string/add"
+                android:background="@color/white"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:text="1"
+                android:singleLine="true"
+                android:numeric="integer"
+                android:gravity="center_vertical"
+                android:
+                android:minWidth="100dp"
+                android:layout_marginRight="@dimen/default_padding"
+                android:layout_marginLeft="@dimen/default_padding"
+                android:background="@color/white"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/sub"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:background="@color/white"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/orange"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="@string/addcart"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/cart"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:adjustViewBounds="true" />
+        </LinearLayout>
+    </LinearLayout>
+</com.app.commons.ReScrollView>

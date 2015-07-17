@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.app.GoodsFragment;
 import com.app.R;
+import com.app.Title;
 import com.app.commons.Constants;
 import com.app.commons.ReScrollView;
 import com.app.interfaces.IGoodsCom;
@@ -46,6 +47,8 @@ public class ListActivity extends Activity {
                             g.setRemark(json.getString("remark"));
                             gs.add(g);
                         }
+                    }else{
+                        Toast.makeText(ListActivity.this, getResources().getString(R.string.no_data_toast_text), Toast.LENGTH_SHORT).show();
                     }
                 }
             }else{
@@ -59,6 +62,8 @@ public class ListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list);
+        Title title = (Title)getFragmentManager().findFragmentById(R.id.list_title_fragment);
+        title.setTitle(getResources().getString(R.string.list_title));
         final GoodsFragment gf = (GoodsFragment) getFragmentManager().findFragmentById(R.id.list_goods);
         gf.setConfig(config);
         config.setUrl(getIntent().getStringExtra("url"));

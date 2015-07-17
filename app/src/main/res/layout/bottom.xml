@@ -10,12 +10,21 @@
         android:text="@string/indexBtnT"
         android:textColor="@color/orange"
         android:layout_weight="1" android:background="@color/white"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/categoryBtnT"
+        android:text="@string/findBtnT"
         android:textColor="@color/orange"
         android:layout_weight="1" android:background="@color/white"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cartBtnT"
+        android:textColor="@color/orange"
+        android:layout_weight="1" android:background="@color/white"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

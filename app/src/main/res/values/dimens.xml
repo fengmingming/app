@@ -10,4 +10,6 @@
     <dimen name="index_loop_height">250px</dimen>
     <dimen name="goods_width">50dp</dimen>
     <dimen name="goods_height">50dp</dimen>
+    <dimen name="btn_sm_width">5dp</dimen>
+    <dimen name="btn_sm_height">3dp</dimen>
 </resources>

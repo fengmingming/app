@@ -95,6 +95,13 @@ public class MainActivityFragment extends Fragment {
 
         //轮播图
         final ViewPager vp = (ViewPager)view.findViewById(R.id.index_loops);
+        ImageView iv = new ImageView(getActivity());
+        iv.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        iv.setImageResource(R.drawable.default_viwepager);
+        List<ImageView> list = new ArrayList<>();
+        list.add(iv);
+        vp.setAdapter(new LoopImgsAdapter(list));
         broadcastImages(vp);
         //下拉刷新
         final SwipeRefreshLayout flush = (SwipeRefreshLayout)view.findViewById(R.id.index_swipe_reflush);

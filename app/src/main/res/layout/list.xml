@@ -5,7 +5,8 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/default_list"
+        android:id="@+id/list_title_fragment"
+        android:title="商品列表222"
         android:name="com.app.Title"/>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/list_swipe"

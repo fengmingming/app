@@ -1,15 +1,19 @@
 package com.app.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.R;
+import com.app.activity.GoodsDetailActivity;
+import com.app.commons.Constants;
 import com.app.commons.Utils;
 
 import java.util.List;
@@ -52,6 +56,16 @@ public class GoodsView extends LinearLayout{
         }
 
         public void builder(Goods g){
+            final long gId = g.getGid();
+            this.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("url", Constants.URL_GOODS_DETAIL + gId);
+                    intent.setClass(GoodsContent.this.getContext(), GoodsDetailActivity.class);
+                    GoodsContent.this.getContext().startActivity(intent);
+                }
+            });
             ImageView iv = new ImageView(this.getContext());
             int wh = Math.round(getResources().getDimension(R.dimen.goods_img_wh));
             iv.setLayoutParams(new ViewGroup.LayoutParams(wh, wh));
