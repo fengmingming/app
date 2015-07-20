@@ -21,4 +21,8 @@
     <string name="add">+</string>
     <string name="sub">-</string>
     <string name="addcart">加入购物车</string>
+    <string name="price">手拉手价格:</string>
+    <string name="marketPrice">市场价:</string>
+    <string name="label_goodsdetail">商品详情</string>
+    <string name="default_buy_number">1</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.app.commons;
 
 import android.widget.ImageView;
-
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.ResponseHandlerInterface;
@@ -54,4 +53,10 @@ public class Utils {
         return client;
     }
 
+    public static boolean isValid(Object obj){
+        if(obj != null && !"".equals(obj)){
+            return true;
+        }
+        return false;
+    }
 }
