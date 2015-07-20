@@ -36,49 +36,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/red">
+            android:gravity="bottom"
+            android:background="@color/white">
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:maxHeight="@dimen/btn_sm_height"
-                android:maxWidth="@dimen/btn_sm_width"
                 android:text="@string/add"
-                android:background="@color/white"/>
+                style="@style/btn_small"
+                />
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:text="1"
+                android:text="100"
                 android:singleLine="true"
                 android:numeric="integer"
-                android:gravity="center_vertical"
-                android:minWidth="100dp"
-                android:layout_marginRight="@dimen/default_padding"
-                android:layout_marginLeft="@dimen/default_padding"
-                android:background="@color/white"/>
+                android:gravity="center"
+                android:background="@drawable/border"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
                 android:text="@string/sub"
-                android:layout_weight="1"
-                android:layout_gravity="left"
-                android:background="@color/white"/>
+                style="@style/btn_small"/>
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@color/orange"
-                android:layout_weight="1"
                 android:textColor="@color/white"
+                style="@style/btn_primary"
+                android:layout_weight="1"
                 android:text="@string/addcart"/>
             <ImageButton
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:src="@drawable/cart"
-                android:layout_weight="1"
-                android:layout_gravity="right"
-                android:adjustViewBounds="true" />
+                android:layout_gravity="end"
+                android:padding="0dp"
+                />
         </LinearLayout>
     </LinearLayout>
 </com.app.commons.ReScrollView>
