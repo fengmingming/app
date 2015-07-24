@@ -1,10 +1,16 @@
 package com.app.commons;
 
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.ResponseHandlerInterface;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.apache.http.Header;
+import org.json.*;
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -17,9 +23,10 @@ public class Utils {
         loader.displayImage(url,iv);
     }
 
-    public static void asyncHttpRequest(String url, Map<String,Object> param, ResponseHandlerInterface resHandler, String method){
+    public static void asyncHttpRequest(String url, Map<String,Object> param, final JsonHttpResponseHandler resHandler, String method){
         RequestParams rp = new RequestParams();
         rp.setContentEncoding("utf-8");
+        rp.add(Constants.KEY, Installation.id());
         if(param != null){
             Object value = null;
             for(String key:param.keySet()){
@@ -36,11 +43,11 @@ public class Utils {
         }
     }
 
-    public static void asyncHttpRequestGet(String url, Map<String,Object> param, ResponseHandlerInterface resHandler){
+    public static void asyncHttpRequestGet(String url, Map<String,Object> param, JsonHttpResponseHandler resHandler){
         asyncHttpRequest(url, param, resHandler, "get");
     }
 
-    public static void asyncHttpRequestPost(String url, Map<String,Object> param, ResponseHandlerInterface resHandler){
+    public static void asyncHttpRequestPost(String url, Map<String,Object> param, JsonHttpResponseHandler resHandler){
         asyncHttpRequest(url, param, resHandler, "post");
     }
 
@@ -58,5 +65,19 @@ public class Utils {
             return true;
         }
         return false;
+    }
+
+    /**
+     * webview使用url的时候使用，通过asynchttpclient请求不需要wrapUrl
+     */
+    public static String wrapUrl(String url){
+        if(url != null){
+            if(url.contains("?")){
+                url = url + "&" + Constants.KEY + "=" + Installation.id();
+            }else{
+                url = url + "?" + Constants.KEY + "=" + Installation.id();
+            }
+        }
+        return url;
     }
 }

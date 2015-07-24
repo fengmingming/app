@@ -64,11 +64,15 @@ public class JSONArray {
 
     public String getString(int i){
         try{
-            return this.ja.getString(i);
+           String str = this.ja.getString(i);
+            if("null".equalsIgnoreCase(str)){
+                return null;
+            }
+            return str;
         }catch(Exception e){
             Log.e("json tools", e.getMessage(), e);
         }
-        return "";
+        return null;
     }
 
     public JSONObject getJSONObject(int i){

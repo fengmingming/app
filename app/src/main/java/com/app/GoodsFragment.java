@@ -70,7 +70,7 @@ public class GoodsFragment extends Fragment implements IGoodsCom{
 
     private void render(){
         loadState.set(true);
-        Utils.asyncHttpRequestGet(config.getUrl(), config.getParam(), new JsonHttpResponseHandler(){
+        Utils.asyncHttpRequestPost(config.getUrl(), config.getParam(), new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
                 super.onSuccess(statusCode, headers, res);

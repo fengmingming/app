@@ -15,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.app.activity.CartActivtiy;
+import com.app.activity.CategoryActivity;
 import com.app.activity.ListActivity;
+import com.app.activity.SearchActivity;
 import com.app.activity.WebActivity;
 import com.app.adapter.LoopImgsAdapter;
 import com.app.commons.Constants;
@@ -99,7 +102,7 @@ public class MainActivityFragment extends Fragment {
         iv.setScaleType(ImageView.ScaleType.FIT_XY);
         iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         iv.setImageResource(R.drawable.default_viwepager);
-        List<ImageView> list = new ArrayList<>();
+        List<ImageView> list = new ArrayList<ImageView>();
         list.add(iv);
         vp.setAdapter(new LoopImgsAdapter(list));
         broadcastImages(vp);
@@ -118,27 +121,36 @@ public class MainActivityFragment extends Fragment {
         });
 
         //事件处理
+
+        ImageButton search = (ImageButton)view.findViewById(R.id.index_search_btn);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
         ImageButton category = (ImageButton)view.findViewById(R.id.index_category_btn);
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), WebActivity.class);
-                intent.putExtra("url",Constants.URL_CATEGORY);
-                startActivity(intent);
-            }
-        });
-        ImageButton goodsok = (ImageButton)view.findViewById(R.id.index_goodsok_btn);
-        goodsok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("url", Constants.URL_CATEGORY_GOODS_LIST + "?first=1");
-                intent.setClass(getActivity(), ListActivity.class);
+                intent.setClass(getActivity(), CategoryActivity.class);
                 startActivity(intent);
             }
         });
 
+        ImageButton cart = (ImageButton) view.findViewById(R.id.index_cart_btn);
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivityFragment.this.getActivity(), CartActivtiy.class);
+                MainActivityFragment.this.getActivity().startActivity(intent);
+            }
+        });
         return view;
     }
 

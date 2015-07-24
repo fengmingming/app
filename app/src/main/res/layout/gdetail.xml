@@ -7,7 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gdetail_title"
-        android:layout_gravity="top"
         android:name="com.app.Title"/>
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
@@ -23,7 +22,7 @@
                 android:orientation="vertical">
                 <android.support.v4.view.ViewPager
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="189dp"
                     android:id="@+id/gd_photo_vp">
                 </android.support.v4.view.ViewPager>
                 <LinearLayout
@@ -89,7 +88,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="bottom"
         android:background="@color/white">
         <Button
             android:text="@string/add"
@@ -112,18 +110,31 @@
             style="@style/btn_small"
             android:id="@+id/gd_sub"/>
         <Button
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             style="@style/btn_primary"
             android:layout_weight="1"
+            android:id="@+id/addCartBtn"
             android:text="@string/addcart"/>
-        <ImageButton
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/cart"
-            android:layout_gravity="end"
-            android:padding="0dp"
-            />
+            android:id="@+id/bottom_container"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/cart"
+                android:layout_gravity="end"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="20dp"
+                android:text="0"
+                android:id="@+id/gd_cart_number"
+                android:gravity="center"
+                android:background="@drawable/circle"/>
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

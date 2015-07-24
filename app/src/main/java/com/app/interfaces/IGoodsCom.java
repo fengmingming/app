@@ -4,6 +4,7 @@ import com.app.view.GoodsView;
 
 import org.json.JSONObject;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public interface IGoodsCom {
             this.param = param;
         }
 
-        private Map<String, Object> param = new HashMap<String, Object>();
+        private Map<String, Object> param = Collections.synchronizedMap(new HashMap<String, Object>());
     }
 
     public interface ParseJsonToGoods{

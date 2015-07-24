@@ -3,6 +3,7 @@
     package="com.app" >
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +23,11 @@
         <activity android:name=".activity.ListActivity">
         </activity>
         <activity android:name=".activity.GoodsDetailActivity"/>
+        <activity android:name=".activity.CategoryActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".activity.SearchActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.CartActivtiy"
+            android:launchMode="singleTask"/>
     </application>
-
 </manifest>

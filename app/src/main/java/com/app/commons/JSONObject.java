@@ -36,11 +36,15 @@ public class JSONObject {
 
     public String getString(String name){
         try{
-            return this.jo.getString(name);
+            String str = this.jo.getString(name);
+            if("null".equalsIgnoreCase(str)){
+                return null;
+            }
+            return str;
         }catch(Exception e){
             Log.e("json tools",e.getMessage(),e);
         }
-        return "";
+        return null;
     }
 
     public Boolean getBoolean(String name){

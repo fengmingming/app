@@ -28,7 +28,7 @@ public class ListActivity extends Activity {
     private IGoodsCom.ParseJsonToGoods categoryHandler = new IGoodsCom.ParseJsonToGoods() {
         @Override
         public List<GoodsView.Goods> parse(JSONObject json) throws Exception {
-            List<GoodsView.Goods> gs = new ArrayList<>();
+            List<GoodsView.Goods> gs = new ArrayList<GoodsView.Goods>();
             if(json.getBoolean("success")){
                 json = json.getJSONObject("result");
                 if(json != null){
@@ -63,7 +63,8 @@ public class ListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list);
         Title title = (Title)getFragmentManager().findFragmentById(R.id.list_title_fragment);
-        title.setTitle(getResources().getString(R.string.list_title));
+        String tStr = getIntent().getStringExtra("title");
+        title.setTitle(tStr == null?getResources().getString(R.string.list_title):tStr);
         final GoodsFragment gf = (GoodsFragment) getFragmentManager().findFragmentById(R.id.list_goods);
         gf.setConfig(config);
         config.setUrl(getIntent().getStringExtra("url"));

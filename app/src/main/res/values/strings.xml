@@ -25,4 +25,9 @@
     <string name="marketPrice">市场价:</string>
     <string name="label_goodsdetail">商品详情</string>
     <string name="default_buy_number">1</string>
+    <string name="category_title">分类列表</string>
+    <string name="search">搜索</string>
+    <string name="cart_info">购物车信息</string>
+    <string name="loading">数据加载中。。。</string>
+    <string name="no_cart_info">购物车为空，去逛逛</string>
 </resources>
