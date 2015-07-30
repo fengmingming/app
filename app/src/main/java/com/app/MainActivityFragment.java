@@ -17,7 +17,10 @@ import android.widget.Toast;
 
 import com.app.activity.CartActivtiy;
 import com.app.activity.CategoryActivity;
+import com.app.activity.CommitOrderActivity;
 import com.app.activity.ListActivity;
+import com.app.activity.LoginActivity;
+import com.app.activity.MyCenterActivity;
 import com.app.activity.SearchActivity;
 import com.app.activity.WebActivity;
 import com.app.adapter.LoopImgsAdapter;
@@ -149,6 +152,30 @@ public class MainActivityFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.setClass(MainActivityFragment.this.getActivity(), CartActivtiy.class);
                 MainActivityFragment.this.getActivity().startActivity(intent);
+            }
+        });
+        ImageButton mycenter = (ImageButton) view.findViewById(R.id.index_mycenter_btn);
+        mycenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.asyncHttpRequestGet(Constants.URL_ISNOTLOGIN, null, new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                        if(statusCode == 200){
+                            com.app.commons.JSONObject jo = new com.app.commons.JSONObject(res);
+                            Intent intent = new Intent();
+                            if(jo.getBoolean("success")){
+                                intent.setClass(MainActivityFragment.this.getActivity(), MyCenterActivity.class);
+                            }else{
+                                intent.setClass(MainActivityFragment.this.getActivity(), LoginActivity.class);
+                                intent.putExtra("clazz", MyCenterActivity.class.getName());
+                            }
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(MainActivityFragment.this.getActivity(), statusCode, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
         return view;

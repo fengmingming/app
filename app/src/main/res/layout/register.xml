@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.app.commons.ReScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.app.Title"
+            android:id="@+id/title" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:stretchColumns="1"
+            android:layout_height="wrap_content">
+            <TableRow>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right"
+                    android:text="*用户名"/>
+                <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border" android:layout_span="2"
+                    android:layout_marginLeft="10dp" android:id="@+id/username" android:singleLine="true"/>
+            </TableRow>
+            <TableRow android:layout_marginTop="10dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right"
+                    android:text="*设置密码"/>
+                <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border" android:layout_span="2"
+                    android:layout_marginLeft="10dp" android:id="@+id/password" android:singleLine="true" android:password="true"/>
+            </TableRow>
+            <TableRow android:layout_marginTop="10dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right"
+                    android:text="*确认密码"/>
+                <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border" android:layout_span="2"
+                    android:layout_marginLeft="10dp" android:id="@+id/password2" android:singleLine="true" android:password="true"/>
+            </TableRow>
+            <TableRow android:layout_marginTop="10dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right"
+                    android:text="手机号"/>
+                <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border" android:layout_span="2"
+                    android:layout_marginLeft="10dp" android:id="@+id/mobile" android:singleLine="true"/>
+            </TableRow>
+            <TableRow android:layout_marginTop="10dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right"
+                    android:text="验证手机"/>
+                <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border"
+                    android:layout_marginLeft="10dp" android:id="@+id/reg_valid_code" android:singleLine="true"/>
+                <Button android:layout_width="wrap_content" android:layout_height="30dp" android:background="@color/orange" android:text="获取短信验证码"
+                    android:layout_marginLeft="10dp" android:id="@+id/reg_valid_code_btn"/>
+            </TableRow>
+            <TableRow android:layout_marginTop="10dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right"
+                    android:text="*验证码" />
+                <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border"
+                    android:layout_marginLeft="10dp" android:id="@+id/reg_img_code" android:singleLine="true"/>
+                <ImageButton android:layout_width="match_parent" android:layout_height="30dp" android:layout_marginLeft="10dp" android:scaleType="fitXY"
+                    android:id="@+id/reg_img_code_btn" android:background="@drawable/border"/>
+            </TableRow>
+            <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:text="注册即认为同意《手拉手用户注册协议》" android:gravity="center"
+                android:textColor="@color/blue" android:layout_marginTop="20dp"/>
+            <Button android:layout_marginTop="10dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/btn_primary"
+                android:text="立即注册" android:id="@+id/reg_btn"/>
+        </TableLayout>
+    </LinearLayout>
+</com.app.commons.ReScrollView>

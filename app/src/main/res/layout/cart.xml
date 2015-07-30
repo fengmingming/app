@@ -16,26 +16,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/container">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                android:paddingTop="100dp"
-                android:textColor="@color/gray"
-                android:gravity="center"
-                android:id="@+id/loading"
-                android:text="@string/loading"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:layout_marginTop="100dp"
-                android:layout_gravity="center"
-                android:background="@drawable/btn_primary"
-                android:text="@string/no_cart_info"
-                android:visibility="gone"
-                android:id="@+id/goIndex"/>
         </LinearLayout>
     </com.app.commons.ReScrollView>
     <LinearLayout
@@ -45,13 +25,7 @@
         android:gravity="center_vertical"
         android:background="@color/white"
         android:id="@+id/bottom_container"
-        android:visibility="gone"
         android:layout_gravity="bottom">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/cart_all"
-            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

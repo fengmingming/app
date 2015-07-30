@@ -14,6 +14,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -48,7 +49,7 @@ public class GoodsDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gdetail);
-        RelativeLayout skipCart = (RelativeLayout)findViewById(R.id.bottom_container);
+        ImageButton skipCart = (ImageButton)findViewById(R.id.cartBtn);
         skipCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

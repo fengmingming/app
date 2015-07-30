@@ -9,9 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.app.activity.CartActivtiy;
 import com.app.activity.CategoryActivity;
+import com.app.activity.LoginActivity;
+import com.app.activity.MyCenterActivity;
+import com.app.commons.Constants;
+import com.app.commons.Utils;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 /**
  * Created by on 2015/6/26.
@@ -51,6 +60,30 @@ public class BottomFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.setClass(BottomFragment.this.getActivity(), CartActivtiy.class);
                 BottomFragment.this.getActivity().startActivity(intent);
+            }
+        });
+        ImageButton center = (ImageButton) view.findViewById(R.id.mycenter);
+        center.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.asyncHttpRequestGet(Constants.URL_ISNOTLOGIN, null, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                        if (statusCode == 200) {
+                            com.app.commons.JSONObject jo = new com.app.commons.JSONObject(res);
+                            Intent intent = new Intent();
+                            if (jo.getBoolean("success")) {
+                                intent.setClass(BottomFragment.this.getActivity(), MyCenterActivity.class);
+                            } else {
+                                intent.setClass(BottomFragment.this.getActivity(), LoginActivity.class);
+                                intent.putExtra("clazz", MyCenterActivity.class.getName());
+                            }
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(BottomFragment.this.getActivity(), statusCode, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
         return view;

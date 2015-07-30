@@ -39,4 +39,17 @@ public class Constants {
      *我的购物车
      */
     public static final String URL_CARTINFO = HOST + "/carts/myCarts.htm";
+    public static final String URL_CART_CHANGESTATUS = HOST + "/carts/changeStatus.htm";
+    public static final String URL_CART_CHANGENUMBER = HOST + "/carts/changeNumber.htm";
+    public static final String URL_CART_DELETEPRODUCTS = HOST + "/carts/deleteProducts.htm";
+    public static final String URL_CART_AMOUNT = HOST + "/carts/amount.htm";
+    public static final String URL_LOGIN = HOST + "/user/loginValidate.htm";
+    public static final String URL_ISNOTLOGIN = HOST + "/user/isUserLogin.htm";
+
+    //图片验证码url
+    public static final String URL_REQIMGCODE = HOST + "/img/validate.htm";
+    public static final String URL_SENDMOBILECODE = HOST + "/user/sendMobileCode.htm";
+    public static final String URL_REGISTER = HOST + "/usr/register.htm";
+    public static final String URL_PCENTER = HOST + "/pcenter/index.htm";
+    public static final String URL_ADDRESS = HOST + "/pcenter/address/index.htm";
 }

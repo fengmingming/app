@@ -1,5 +1,6 @@
 package com.app.commons;
 
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import org.apache.http.Header;
 import org.json.*;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
 import java.util.Map;
 
 public class Utils {
@@ -26,13 +28,13 @@ public class Utils {
     public static void asyncHttpRequest(String url, Map<String,Object> param, final JsonHttpResponseHandler resHandler, String method){
         RequestParams rp = new RequestParams();
         rp.setContentEncoding("utf-8");
-        rp.add(Constants.KEY, Installation.id());
+        rp.put(Constants.KEY, Installation.id());
         if(param != null){
             Object value = null;
             for(String key:param.keySet()){
                 value = param.get(key);
                 if(key !=null && value != null){
-                    rp.add(key, value.toString());
+                    rp.put(key, value.toString());
                 }
             }
         }
@@ -79,5 +81,26 @@ public class Utils {
             }
         }
         return url;
+    }
+
+    public static String md5(String str){
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(str.getBytes());
+            return toHex(md.digest());
+        }catch(Exception e){
+            Log.e("md5",e.getMessage(),e);
+        }
+        return str;
+    }
+
+    private static String toHex(byte buffer[]) {
+        StringBuffer sb = new StringBuffer(buffer.length * 2);
+        for (int i = 0; i < buffer.length; i++) {
+            sb.append(Character.forDigit((buffer[i] & 240) >> 4, 16));
+            sb.append(Character.forDigit(buffer[i] & 15, 16));
+        }
+
+        return sb.toString();
     }
 }
