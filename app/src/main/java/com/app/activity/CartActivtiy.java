@@ -49,8 +49,10 @@ public class CartActivtiy extends Activity {
     private LinearLayout container;
     private Button settle;
     private TextView total;
-    private TextView discutPrice;
+    private TextView discountPrice;
     private LinearLayout bottom_container;
+    private boolean flag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +89,7 @@ public class CartActivtiy extends Activity {
             }
         });
         total = (TextView)findViewById(R.id.total);
-        discutPrice = (TextView)findViewById(R.id.discutPrice);
+        discountPrice = (TextView)findViewById(R.id.discountPrice);
         bottom_container = (LinearLayout) findViewById(R.id.bottom_container);
     }
 
@@ -98,24 +100,33 @@ public class CartActivtiy extends Activity {
     }
 
     private void flushCartInfo(){
-        container.removeAllViews();
         bottom_container.setVisibility(View.GONE);
         Utils.asyncHttpRequestGet(Constants.URL_CARTINFO,null,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                if(statusCode != 200){
+                    Toast.makeText(CartActivtiy.this, statusCode,Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 com.app.commons.JSONObject jo = new com.app.commons.JSONObject(response);
                 if(jo.getBoolean("success")){
+                    container.removeAllViews();
                     jo = jo.getJSONObject("result");
                     if(jo != null) jo = jo.getJSONObject("shopCart");
                     if(jo != null){
+                        flag = jo.getBoolean("flag");
                         JSONArray ja = jo.getJSONArray("productList");
                         if(ja != null && ja.length() > 0){
                             bottom_container.setVisibility(View.VISIBLE);
                         }
                         total.setText(jo.getString("amount"));
-                        discutPrice.setText(jo.getString("discountPrice"));
+                        discountPrice.setText(jo.getString("discountPrice"));
+                        LinearLayout cart;
                         for(int i=0,j=ja.length();i<j;i++){
-                            container.addView(createProductInfo(ja.getJSONObject(i)));
+                            cart = createProductInfo(ja.getJSONObject(i));
+                            if(cart != null){
+                                container.addView(cart);
+                            }
                         }
                     }else{
                             Button btn = new Button(CartActivtiy.this);
@@ -145,6 +156,10 @@ public class CartActivtiy extends Activity {
     }
 
     private LinearLayout createProductInfo(com.app.commons.JSONObject jo){
+        JSONArray ja = jo.getJSONArray("settleGoods");
+        if(ja == null || ja.length()==0){
+            return null;
+        }
         final String productSku = jo.getString("productSku");
         LinearLayout info = new LinearLayout(CartActivtiy.this);
         info.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -190,7 +205,6 @@ public class CartActivtiy extends Activity {
         center.setOrientation(LinearLayout.VERTICAL);
         center.setLayoutParams(centerLP);
         center.setPadding(10,0,0,0);
-        JSONArray ja = jo.getJSONArray("settleGoods");
         if(ja != null && ja.length() > 0){
             ImageView iv = new ImageView(CartActivtiy.this);
             int wh = Math.round(getResources().getDimension(R.dimen.cart_img_wh));
@@ -199,7 +213,11 @@ public class CartActivtiy extends Activity {
             Utils.asyncLoadInternetImageView(iv, Constants.URL_IMAGE + "/200X200" + ja.getJSONObject(0).getString("photoUrl"));
             info.addView(iv);
             TextView tv = new TextView(CartActivtiy.this);
-            tv.setText(ja.getJSONObject(0).getString("goodsName"));
+            if(ja.length() == 1){
+                tv.setText(ja.getJSONObject(0).getString("goodsName"));
+            }else{
+                tv.setText(getResources().getString(R.string.goods_set));
+            }
             center.addView(tv);
             LinearLayout bottom = new LinearLayout(CartActivtiy.this);
             bottom.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));

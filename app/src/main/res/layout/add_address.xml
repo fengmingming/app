@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.app.commons.ReScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+        <TextView android:layout_width="match_parent" android:layout_height="50dp"
+            android:text="收货地址变动" android:gravity="center" android:background="@drawable/border2" android:layout_span="2"/>
+        <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border2" android:gravity="center_vertical"
+            android:padding="5dp">
+            <TextView android:layout_width="match_parent" android:layout_height="40dp" android:text="省" android:gravity="center_vertical"/>
+            <Spinner android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/province"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border2" android:gravity="center_vertical"
+            android:padding="5dp">
+            <TextView android:layout_width="match_parent" android:layout_height="40dp" android:text="市" android:gravity="center_vertical"/>
+            <Spinner android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/city"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border2" android:gravity="center_vertical"
+            android:padding="5dp">
+            <TextView android:layout_width="match_parent" android:layout_height="40dp" android:text="区" android:gravity="center_vertical"/>
+            <Spinner android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/district"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border2" android:gravity="center_vertical"
+            android:padding="5dp">
+            <TextView android:layout_width="match_parent" android:layout_height="40dp" android:text="商圈" android:gravity="center_vertical"/>
+            <Spinner android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/community"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border2" android:gravity="center_vertical"
+            android:padding="5dp">
+            <TextView android:layout_width="match_parent" android:layout_height="40dp" android:text="亭子" android:gravity="center_vertical"/>
+            <Spinner android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/pavilion"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border2" android:gravity="center_vertical"
+            android:padding="5dp">
+            <TextView android:layout_width="match_parent" android:layout_height="40dp" android:text="详细地址" android:gravity="center_vertical"/>
+            <EditText android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/remark" android:background="@drawable/border2" android:singleLine="true"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border2" android:gravity="center_vertical"
+            android:padding="5dp">
+            <TextView android:layout_width="match_parent" android:layout_height="40dp" android:text="收货人" android:gravity="center_vertical"/>
+            <EditText android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/receiver" android:background="@drawable/border2" android:singleLine="true"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border2" android:gravity="center_vertical"
+            android:padding="5dp">
+            <TextView android:layout_width="match_parent" android:layout_height="40dp" android:text="手机号" android:gravity="center_vertical"/>
+            <EditText android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/mobile" android:background="@drawable/border2" android:singleLine="true"/>
+        </TableRow>
+        <Button android:layout_height="30dp" android:layout_width="match_parent" android:text="提交" android:id="@+id/submit" android:background="@drawable/btn_primary" android:layout_span="2"/>
+    </TableLayout>
+</com.app.commons.ReScrollView>

@@ -30,11 +30,12 @@
         <activity android:name=".activity.CartActivtiy"
             android:launchMode="singleTask"/>
         <activity android:name=".activity.CommitOrderActivity"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleTask"/>
         <activity android:name=".activity.LoginActivity"
             android:launchMode="singleInstance"/>
         <activity android:name=".activity.RegisterActivity" android:launchMode="singleInstance"/>
         <activity android:name=".activity.MyCenterActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.AddressActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.AddAddressActivity"/>
     </application>
 </manifest>

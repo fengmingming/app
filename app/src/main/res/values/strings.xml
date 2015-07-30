@@ -37,5 +37,8 @@
     <string name="no_blank">必填</string>
     <string name="mysls">我的手拉手</string>
     <string name="address">收货地址管理</string>
-    <string name="address_detail">详细地址</string>
+    <string name="address_detail">详细地址:</string>
+    <string name="delete">删除</string>
+    <string name="update">修改</string>
+    <string name="goods_set">商品组合</string>
 </resources>

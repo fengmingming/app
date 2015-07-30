@@ -51,5 +51,13 @@ public class Constants {
     public static final String URL_SENDMOBILECODE = HOST + "/user/sendMobileCode.htm";
     public static final String URL_REGISTER = HOST + "/usr/register.htm";
     public static final String URL_PCENTER = HOST + "/pcenter/index.htm";
+    //地址
     public static final String URL_ADDRESS = HOST + "/pcenter/address/index.htm";
+    public static final String URL_ADDRESS_SETDEFAULT = HOST + "/address/setDefaultAddress.htm";
+    public static final String URL_ADDRESS_DELETE = HOST + "/address/deleteAddress.htm";
+    public static final String URL_AREA = HOST + "/address/getComboboxByPId.htm";
+    public static final String URL_ADDORUPDAREA = HOST + "/address/saveOrUpdateAddress.htm";
+    public static final String URL_ADDRESS_ID = HOST + "/address/getUserAddress.htm";
+
+
 }

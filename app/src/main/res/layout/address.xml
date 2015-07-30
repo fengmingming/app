@@ -19,5 +19,14 @@
             android:layout_height="match_parent">
 
         </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="新增收货地址"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_primary"
+            android:fontFamily="sans-serif-light"
+            android:id="@+id/add"/>
     </LinearLayout>
 </com.app.commons.ReScrollView>

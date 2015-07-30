@@ -1,9 +1,13 @@
 package com.app.activity;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -20,17 +24,30 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by on 2015/7/29.
  */
 public class AddressActivity extends Activity {
     private LinearLayout container;
+    private Button addBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.address);
         container = (LinearLayout) findViewById(R.id.container);
+        addBtn = (Button) findViewById(R.id.add);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(AddressActivity.this,AddAddressActivity.class);
+                startActivity(intent);
+            }
+        });
         Title title = (Title) getFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.address));
     }
@@ -38,6 +55,10 @@ public class AddressActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        flushContainer();
+    }
+
+    private void flushContainer(){
         Utils.asyncHttpRequestGet(Constants.URL_ADDRESS, null, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
@@ -46,7 +67,13 @@ public class AddressActivity extends Activity {
                     if(jo.getBoolean("success")){
                         jo = jo.getJSONObject("result");
                         if(jo != null){
+                            container.removeAllViews();
                             JSONArray ja = jo.getJSONArray("entry");
+                            if(ja.length() >= 3){
+                                addBtn.setVisibility(View.GONE);
+                            }else{
+                                addBtn.setVisibility(View.VISIBLE);
+                            }
                             for(int i=0,j=ja.length();i<j;i++){
                                 createContainer(ja.getJSONObject(i));
                             }
@@ -62,6 +89,7 @@ public class AddressActivity extends Activity {
     }
 
     private void createContainer(com.app.commons.JSONObject jo){
+        final long addressId = jo.getLong("id");
         LinearLayout.LayoutParams match = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         match.weight = 1;
         LinearLayout.LayoutParams wrap = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -73,10 +101,24 @@ public class AddressActivity extends Activity {
         h.setGravity(Gravity.CENTER_VERTICAL);
         final CheckBox cb = new CheckBox(AddressActivity.this);
         cb.setButtonDrawable(R.drawable.checkbox);
+        if(jo.getBoolean("isdefault")){
+            cb.setChecked(true);
+        }else{
+            cb.setChecked(false);
+        }
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                if(b){
+                    Map<String, Object> param = new HashMap<>();
+                    param.put("id", addressId);
+                    Utils.asyncHttpRequestGet(Constants.URL_ADDRESS_SETDEFAULT, param, new JsonHttpResponseHandler(){
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            flushContainer();
+                        }
+                    });
+                }
             }
         });
         h.addView(cb);
@@ -91,6 +133,7 @@ public class AddressActivity extends Activity {
         TextView receiver = new TextView(AddressActivity.this);
         TextView mobile = new TextView(AddressActivity.this);
         mobile.setPadding(20,0,0,0);
+        mobile.setLayoutParams(match);
         detail.setText(jo.getString("addressDetail"));
         receiver.setText(jo.getString("receiver"));
         mobile.setText(jo.getString("mobile"));
@@ -98,11 +141,40 @@ public class AddressActivity extends Activity {
         center_top.setOrientation(LinearLayout.HORIZONTAL);
         center_top.addView(tv);
         center_top.addView(detail);
+        TextView del = new TextView(AddressActivity.this);
+        del.setText(getResources().getString(R.string.delete));
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map<String, Object> param = new HashMap<>();
+                param.put("id", addressId);
+                Utils.asyncHttpRequestGet(Constants.URL_ADDRESS_DELETE, param, new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        flushContainer();
+                    }
+                });
+            }
+        });
+        TextView upd = new TextView(AddressActivity.this);
+        upd.setText(getResources().getString(R.string.update));
+        upd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.putExtra("addressId", addressId);
+                intent.setClass(AddressActivity.this,AddAddressActivity.class);
+                startActivity(intent);
+            }
+        });
+        upd.setPadding(10,0,0,0);
         LinearLayout center_bottom = new LinearLayout(AddressActivity.this);
         center_bottom.setOrientation(LinearLayout.HORIZONTAL);
+        center_bottom.setPadding(0,10,10,0);
         center_bottom.addView(receiver);
         center_bottom.addView(mobile);
-        center_bottom.setPadding(0,10,0,0);
+        center_bottom.addView(del);
+        center_bottom.addView(upd);
         center.addView(center_top);
         center.addView(center_bottom);
         h.addView(center);
