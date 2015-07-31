@@ -41,6 +41,15 @@ public class MyCenterActivity extends Activity {
                 startActivity(intent);
             }
         });
+        TextView myorders = (TextView)findViewById(R.id.my_orders);
+        myorders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(MyCenterActivity.this, OrderListActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

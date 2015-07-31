@@ -41,4 +41,9 @@
     <string name="delete">删除</string>
     <string name="update">修改</string>
     <string name="goods_set">商品组合</string>
+    <string name="internet_exception">网络异常</string>
+    <string name="input_paypassword">请输入支付密码</string>
+    <string name="title_commit_order_suc">提交订单成功页</string>
+    <string name="no_can_use_coupon">没有符合条件的优惠券</string>
+    <string name="select_coupon">请选择优惠券</string>
 </resources>

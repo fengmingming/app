@@ -58,6 +58,8 @@ public class Constants {
     public static final String URL_AREA = HOST + "/address/getComboboxByPId.htm";
     public static final String URL_ADDORUPDAREA = HOST + "/address/saveOrUpdateAddress.htm";
     public static final String URL_ADDRESS_ID = HOST + "/address/getUserAddress.htm";
-
-
+    //提交订单
+    public static final String URL_COMMITORDER = HOST + "/order/commitOrder.htm";
+    //订单列表
+    public static final String URL_ORDERLIST = HOST + "/pcenter/orders/list.htm";
 }

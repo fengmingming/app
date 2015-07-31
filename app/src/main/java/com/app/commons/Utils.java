@@ -87,7 +87,7 @@ public class Utils {
         try{
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(str.getBytes());
-            return toHex(md.digest());
+            return toHex(md.digest()).toUpperCase();
         }catch(Exception e){
             Log.e("md5",e.getMessage(),e);
         }
@@ -100,7 +100,6 @@ public class Utils {
             sb.append(Character.forDigit((buffer[i] & 240) >> 4, 16));
             sb.append(Character.forDigit(buffer[i] & 15, 16));
         }
-
         return sb.toString();
     }
 }

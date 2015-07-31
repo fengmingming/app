@@ -2,7 +2,9 @@ package com.app;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.INotificationSideChannel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,9 @@ public class Title extends Fragment {
 
     private String title;
     private BottomFragment navigation;
-    public Title() {
+    private Intent backIntent;
 
+    public Title() {
     }
 
     public String getTitle() {
@@ -22,6 +25,14 @@ public class Title extends Fragment {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setBackIntent(Intent backIntent){
+        this.backIntent = backIntent;
+    }
+
+    public Intent getBackIntent(){
+        return this.backIntent;
     }
 
     @Override
@@ -46,7 +57,11 @@ public class Title extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               activity.onBackPressed();
+               if(backIntent == null){
+                   activity.onBackPressed();
+               } else{
+                   startActivity(backIntent);
+               }
             }
         });
         return view;

@@ -37,5 +37,7 @@
         <activity android:name=".activity.MyCenterActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.AddressActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.AddAddressActivity"/>
+        <activity android:name=".activity.CommitOrderSucActivity"/>
+        <activity android:name=".activity.OrderListActivity" android:launchMode="singleTask"/>
     </application>
 </manifest>

@@ -1,19 +1,27 @@
 package com.app.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.R;
+import com.app.commons.ComboxDto;
 import com.app.commons.Constants;
 import com.app.commons.JSONArray;
 import com.app.commons.Utils;
@@ -21,6 +29,11 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by on 2015/7/27.
@@ -39,6 +52,11 @@ public class CommitOrderActivity extends Activity {
     private String payPassHint;
     private boolean flag;
     private boolean isExistAddress = false;
+    private RadioGroup group2;
+    private Long useCouponId;
+    private TextView couponName;
+    private LinearLayout couponContainer;
+    private List<ComboxDto> coupons = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +83,41 @@ public class CommitOrderActivity extends Activity {
             }
         });
         rg = (RadioGroup) findViewById(R.id.group);
+        group2 = (RadioGroup) findViewById(R.id.group2);
         amount = (TextView) findViewById(R.id.amount);
         discountPrice = (TextView) findViewById(R.id.discountPrice);
         payPrice = (TextView) findViewById(R.id.payPrice);
+        couponName = (TextView) findViewById(R.id.couponName);
+        couponContainer = (LinearLayout) findViewById(R.id.couponContainer);
+        couponContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(coupons.size() > 0){
+                    final Spinner spinner = new Spinner(CommitOrderActivity.this);
+                    spinner.setAdapter(new ArrayAdapter<ComboxDto>(CommitOrderActivity.this,android.R.layout.simple_dropdown_item_1line,coupons.toArray(new ComboxDto[]{})));
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(CommitOrderActivity.this);
+                    builder.setTitle(R.string.select_coupon);
+                    builder.setView(spinner);
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if(spinner.getSelectedItem() != null){
+                                ComboxDto dto = (ComboxDto) spinner.getSelectedItem();
+                                useCouponId = Long.valueOf(dto.getValue());
+                                couponName.setText(dto.getKey());
+                            }else{
+                                couponName.setText("");
+                                useCouponId = null;
+                            }
+                        }
+                    });
+                    builder.setNegativeButton("取消", null);
+                    builder.show();
+                }else{
+                    Toast.makeText(CommitOrderActivity.this, getResources().getString(R.string.no_can_use_coupon),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -79,6 +129,9 @@ public class CommitOrderActivity extends Activity {
                 if(statusCode == 200){
                     com.app.commons.JSONObject jo = new com.app.commons.JSONObject(res);
                     if(jo.getBoolean("success")){
+                        useCouponId = null;
+                        couponName.setText("");
+                        coupons.clear();
                         container.removeAllViews();
                         jo = jo.getJSONObject("result");
                         if(jo != null){
@@ -103,6 +156,13 @@ public class CommitOrderActivity extends Activity {
                                 amount.setText(cart.getString("amount"));
                                 payPrice.setText(cart.getString("payPrice"));
                                 discountPrice.setText(cart.getString("discountPrice"));
+                                JSONArray cja = cart.getJSONArray("canUseCouponList");
+                                if(cja != null&&cja.length()>0){
+                                    for(int i=0,j=cja.length();i<j;i++){
+                                        ComboxDto dto = new ComboxDto(cja.getJSONObject(i).getString("name"),cja.getJSONObject(i).getString("id"));
+                                        coupons.add(dto);
+                                    }
+                                }
                             }
                         }
                     }else {
@@ -172,6 +232,66 @@ public class CommitOrderActivity extends Activity {
             case R.id.alipay:payType = 1;break;
             case R.id.wx:payType=4;break;
         }
+        int dtype = 2;
+        switch (group2.getCheckedRadioButtonId()){
+            case R.id.zt:dtype = 1;break;
+            case R.id.sm:dtype = 2;break;
+        }
+        final Map<String,Object> param = new HashMap<>();
+        param.put("payType", payType);
+        param.put("deliveryType",dtype);
+        if(useCouponId != null){
+            param.put("userCouponId",useCouponId);
+        }
+        if(payType == 2){
+            final EditText payPass = new EditText(CommitOrderActivity.this);
+            payPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            AlertDialog.Builder builder = new AlertDialog.Builder(CommitOrderActivity.this);
+            builder.setTitle(getResources().getString(R.string.input_paypassword)).setView(payPass).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    String pass = payPass.getText().toString().trim();
+                    if("".equals(pass)){
+                        Toast.makeText(CommitOrderActivity.this,"支付密码不能为空",Toast.LENGTH_SHORT).show();
+                    }else{
+                        param.put("payPassword",Utils.md5(pass));
+                        commitOrder(param);
+                    }
+                }
+            }).setNegativeButton("取消", null).show();
+        }else{
+            commitOrder(param);
+        }
+    }
 
+    private void commitOrder(Map<String,Object> param){
+        Utils.asyncHttpRequestPost(Constants.URL_COMMITORDER,param,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                if(statusCode == 200){
+                    com.app.commons.JSONObject jo = new com.app.commons.JSONObject(res);
+                    if(jo.getBoolean("success")){
+                        jo = jo.getJSONObject("result");
+                        if(jo != null){
+                            Intent intent = new Intent();
+                            intent.setClass(CommitOrderActivity.this,CommitOrderSucActivity.class);
+                            intent.putExtra("orderId",jo.getLong("orderId"));
+                            intent.putExtra("orderNum", jo.getString("orderNum"));
+                            intent.putExtra("payPrice", jo.getString("payPrice"));
+                            intent.putExtra("payType", jo.getInt("payType"));
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent();
+                            intent.setClass(CommitOrderActivity.this,OrderListActivity.class);
+                            startActivity(intent);
+                        }
+                    }else{
+                        Toast.makeText(CommitOrderActivity.this, jo.getString("errMsg"), Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(CommitOrderActivity.this, getResources().getString(R.string.internet_exception), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

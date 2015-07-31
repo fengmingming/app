@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.app.Title"
+        android:id="@+id/title"/>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:stretchColumns="0,1,2"
+        android:layout_height="wrap_content">
+        <TableRow>
+            <Button android:text="待付款" android:background="@drawable/border" android:id="@+id/ispaid1"/>
+            <Button android:text="待收货" android:background="@drawable/border" android:id="@+id/ostatus4"/>
+            <Button android:text="全部订单" android:background="@drawable/border" android:id="@+id/oall"/>
+        </TableRow>
+    </TableLayout>
+    <com.app.commons.ReScrollView
+        android:layout_weight="1"
+        android:id="@+id/flush"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/container"
+            android:layout_height="match_parent"></LinearLayout>
+    </com.app.commons.ReScrollView>
+</LinearLayout>

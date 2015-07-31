@@ -100,6 +100,7 @@ public class CartActivtiy extends Activity {
     }
 
     private void flushCartInfo(){
+        settleNum = 0;
         bottom_container.setVisibility(View.GONE);
         Utils.asyncHttpRequestGet(Constants.URL_CARTINFO,null,new JsonHttpResponseHandler(){
             @Override
