@@ -1,5 +1,6 @@
 package com.app.commons;
 
+import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -101,5 +102,33 @@ public class Utils {
             sb.append(Character.forDigit(buffer[i] & 15, 16));
         }
         return sb.toString();
+    }
+
+    public static String createStatus(int status){
+        String str = null;
+        switch (status){
+            case 1:str = "未确认";break;
+            case 2:str = "确认";break;
+            case 3:str = "处理中";break;
+            case 4:str = "已发货";break;
+            case 5:str = "确认收货";break;
+            case 6:str = "退货中";break;
+            case 7:str = "退货完成";break;
+        }
+        return str;
+    }
+
+    public static String createState(int state){
+        String str = null;
+        switch (state){
+            case 1:str = "正常";break;
+            case 2:str = "取消";break;
+            case 127:str = "异常";break;
+        }
+        return str;
+    }
+
+    public static void pay(Context context, int payType){
+
     }
 }

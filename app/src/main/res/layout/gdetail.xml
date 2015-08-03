@@ -52,12 +52,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/price"
-                            android:textColor="@color/orange"/>
+                            android:textColor="@color/def_fontcolor"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="15dp"
-                            android:textColor="@color/orange"
+                            android:textColor="@color/def_fontcolor"
                             android:id="@+id/gd_price"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
             <ImageButton
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/cart"
+                android:src="@drawable/ccart"
                 android:id="@+id/cartBtn"
                 android:layout_gravity="end"
                 />
@@ -132,6 +132,7 @@
                 android:layout_height="wrap_content"
                 android:minWidth="20dp"
                 android:text="0"
+                android:textColor="@color/white"
                 android:id="@+id/gd_cart_number"
                 android:gravity="center"
                 android:background="@drawable/circle"/>

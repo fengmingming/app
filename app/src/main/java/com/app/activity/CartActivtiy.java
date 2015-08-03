@@ -168,6 +168,7 @@ public class CartActivtiy extends Activity {
         info.setGravity(Gravity.CENTER_VERTICAL);
         info.setBackgroundResource(R.drawable.border2);
         final CheckBox rb = new CheckBox(CartActivtiy.this);
+        rb.setPadding(10,0,10,0);
         rb.setButtonDrawable(R.drawable.checkbox);
         if(jo.getBoolean("checked")){
             rb.setChecked(true);

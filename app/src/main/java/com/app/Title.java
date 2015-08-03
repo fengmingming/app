@@ -8,6 +8,7 @@ import android.support.v4.app.INotificationSideChannel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Title extends Fragment {
@@ -45,7 +46,7 @@ public class Title extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.title, container, false);
         this.navigation = (BottomFragment) getFragmentManager().findFragmentById(R.id.navigation);
-        TextView title_right = (TextView) view.findViewById(R.id.title_right);
+        ImageView title_right = (ImageView) view.findViewById(R.id.title_right);
         title_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +54,7 @@ public class Title extends Fragment {
             }
         });
         final Activity activity = this.getActivity();
-        TextView back = (TextView) view.findViewById(R.id.title_left);
+        ImageView back = (ImageView) view.findViewById(R.id.title_left);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

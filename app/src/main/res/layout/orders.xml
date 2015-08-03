@@ -10,7 +10,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:stretchColumns="0,1,2"
-        android:layout_height="wrap_content">
+        android:layout_height="30dp">
         <TableRow>
             <Button android:text="待付款" android:background="@drawable/border" android:id="@+id/ispaid1"/>
             <Button android:text="待收货" android:background="@drawable/border" android:id="@+id/ostatus4"/>

@@ -89,7 +89,9 @@ public class LoginActivity extends Activity {
         forgetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent();
+                intent.setClass(LoginActivity.this,ResetPassActivity.class);
+                startActivity(intent);
             }
         });
         final TextView regBtn = (TextView) findViewById(R.id.regBtn);

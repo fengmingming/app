@@ -31,6 +31,7 @@
     <color name="fuchsia">#FF00FF</color><!--紫红色 -->
     <color name="magenta">#FF00FF</color><!--红紫色 -->
     <color name="red">#FF0000</color><!--红色 -->
+    <color name="def_color">#B61D1D</color><!-- 默认色 -->
     <color name="oldlace">#FDF5E6</color><!--老花色 -->
     <color name="lightgoldenrodyellow">#FAFAD2</color><!--亮金黄色 -->
     <color name="linen">#FAF0E6</color><!--亚麻色 -->
@@ -146,4 +147,7 @@
     <color name="darkblue">#00008B</color><!--暗蓝色 -->
     <color name="navy">#000080</color><!--海军色 -->
     <color name="black">#000000</color><!--黑色 -->
+    <color name="def_border">#E85356</color>
+    <color name="def_backgroud">#E4393C</color>
+    <color name="def_fontcolor">#CD5C5C</color>
 </resources>

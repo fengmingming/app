@@ -14,4 +14,6 @@
     <dimen name="btn_sm_width">5dp</dimen>
     <dimen name="btn_sm_height">3dp</dimen>
     <dimen name="btn_height">30dp</dimen>
+    <dimen name="couponfont">30dp</dimen>
+    <dimen name="couponname">20dp</dimen>
 </resources>

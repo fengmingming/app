@@ -5,7 +5,7 @@ package com.app.commons;
  */
 public class Constants {
     public static final String KEY = "app-token";
-    public static final String HOST = "http://app.365020.com/mobile";
+    public static final String HOST = "http://app.365020.com/app-client";
     public static final String URL_INDEX_FLOOR = HOST + "/goods/getOEMAjax.htm";
     public static final String URL_IMAGE = "http://img.app.365020.com";
     public static final String URL_INDEX_LOOP = HOST + "/index.htm";
@@ -62,4 +62,19 @@ public class Constants {
     public static final String URL_COMMITORDER = HOST + "/order/commitOrder.htm";
     //订单列表
     public static final String URL_ORDERLIST = HOST + "/pcenter/orders/list.htm";
+    public static final String URL_ODETAIL =  HOST + "/pcenter/orders/detail.htm";
+
+    public static final String URL_ODETELE = HOST + "/pcenter/orders/delete.htm";
+    public static final String URL_MYCOUPON = HOST + "/pcenter/coupon/myCoupon.htm";
+    public static final String URL_COUPONCODE = HOST + "/pcenter/coupon/code.htm";
+    public static final String URL_PAYPASS = HOST + "/user/setPayPass.htm";
+    public static final String URL_BINGDMOBILE = HOST + "/user/bindmobile.htm";
+    public static final String URL_ISEXISTMOBILE = HOST + "/user/isExistMobile.htm";
+    public static final String URL_SENDMCTOUM = HOST + "/user/sendMCToUM.htm";
+    /**
+     * 退出登录
+     */
+    public static final String URL_LOGOUT = HOST + "/user/logout.htm";
+
+    public static final String URL_RESETPASS = HOST + "/user/resetPwd.htm";
 }

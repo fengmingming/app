@@ -47,7 +47,7 @@
                     android:text="验证手机"/>
                 <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/border"
                     android:layout_marginLeft="10dp" android:id="@+id/reg_valid_code" android:singleLine="true"/>
-                <Button android:layout_width="wrap_content" android:layout_height="30dp" android:background="@color/orange" android:text="获取短信验证码"
+                <Button android:layout_width="wrap_content" android:layout_height="30dp" android:background="@drawable/btn_primary" android:text="获取短信验证码"
                     android:layout_marginLeft="10dp" android:id="@+id/reg_valid_code_btn"/>
             </TableRow>
             <TableRow android:layout_marginTop="10dp">

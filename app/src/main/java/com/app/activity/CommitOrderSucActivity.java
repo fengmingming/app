@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.app.MainActivity;
 import com.app.R;
 import com.app.Title;
+import com.app.commons.Utils;
 
 /**
  * Created by on 2015/7/31.
@@ -47,7 +48,7 @@ public class CommitOrderSucActivity extends Activity {
             pay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Utils.pay(CommitOrderSucActivity.this, payType);
                 }
             });
         }

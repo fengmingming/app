@@ -1,6 +1,7 @@
 package com.app.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.R;
+import com.app.Title;
 import com.app.commons.Constants;
 import com.app.commons.JSONArray;
 import com.app.commons.ReScrollView;
@@ -35,21 +37,24 @@ public class OrderListActivity extends Activity {
     private Button ostatus4;
     private Button oall;
     private ReScrollView flush;
-    private int page = 1;
+    private int page = 0;
     private int rows = 10;
     private int curBtn = 3;
     private LinearLayout container;
+    private boolean isLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orders);
+        Title title = (Title)getFragmentManager().findFragmentById(R.id.title);
+        title.setTitle(getResources().getString(R.string.title_orders));
         ispaid1 = (Button) findViewById(R.id.ispaid1);
         ispaid1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 btnChangeTextColor();
-                ispaid1.setTextColor(getResources().getColor(R.color.orange));
+                ispaid1.setTextColor(getResources().getColor(R.color.def_fontcolor));
                 clearContainer();
                 curBtn = 1;
                 flushContainer();
@@ -60,7 +65,7 @@ public class OrderListActivity extends Activity {
             @Override
             public void onClick(View view) {
                 btnChangeTextColor();
-                ostatus4.setTextColor(getResources().getColor(R.color.orange));
+                ostatus4.setTextColor(getResources().getColor(R.color.def_fontcolor));
                 clearContainer();
                 curBtn = 2;
                 flushContainer();
@@ -71,33 +76,44 @@ public class OrderListActivity extends Activity {
             @Override
             public void onClick(View view) {
                 btnChangeTextColor();
-                oall.setTextColor(getResources().getColor(R.color.orange));
+                oall.setTextColor(getResources().getColor(R.color.def_fontcolor));
                 clearContainer();
                 curBtn = 3;
                 flushContainer();
             }
         });
         flush = (ReScrollView) findViewById(R.id.flush);
+        flush.setScrollChangeEvent(new ReScrollView.ScrollChangeEvent() {
+            @Override
+            public void onScrollChanged() {
+                flushContainer();
+            }
+        });
         container = (LinearLayout) findViewById(R.id.container);
+        btnChangeTextColor();
+        oall.setTextColor(getResources().getColor(R.color.def_fontcolor));
+        curBtn = 3;
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        btnChangeTextColor();
-        oall.setTextColor(getResources().getColor(R.color.orange));
         clearContainer();
-        curBtn = 3;
         flushContainer();
     }
 
     private void clearContainer(){
-        page = 1;
+        page = 0;
         container.removeAllViews();
     }
 
     private void flushContainer(){
+        if(isLoading){
+            return;
+        }
+        isLoading = true;
         Map<String,Object> param = new HashMap<>();
+        page ++ ;
         param.put("page",page);
         param.put("rows",rows);
         switch (curBtn){
@@ -114,6 +130,7 @@ public class OrderListActivity extends Activity {
         Utils.asyncHttpRequestPost(Constants.URL_ORDERLIST, param, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                isLoading = false;
                 if(statusCode == 200){
                     com.app.commons.JSONObject jo = new com.app.commons.JSONObject(res);
                     if(jo.getBoolean("success")){
@@ -161,11 +178,11 @@ public class OrderListActivity extends Activity {
         h.addView(ctime);
         TextView status = new TextView(OrderListActivity.this);
         if(jo.getInt("state") != 1){
-            status.setText("订单状态："+createState(jo.getInt("state")));
+            status.setText("订单状态："+Utils.createState(jo.getInt("state")));
         }else if(jo.getInt("isPaid") == 1){
             status.setText("订单状态：未付款");
         }else{
-            status.setText("订单状态：" + createStatus(jo.getInt("status")));
+            status.setText("订单状态：" + Utils.createStatus(jo.getInt("status")));
         }
         h.addView(status);
         JSONArray ja = jo.getJSONArray("orderDetailList");
@@ -208,45 +225,28 @@ public class OrderListActivity extends Activity {
         LinearLayout.LayoutParams pricelp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         pricelp.weight = 1;
         price.setLayoutParams(pricelp);
-        price.setTextColor(getResources().getColor(R.color.orange));
+        price.setTextColor(getResources().getColor(R.color.def_fontcolor));
         price.setText("￥"+jo.getString("orderPrice"));
         bottom.addView(t1);
         bottom.addView(price);
-        Button btn = new Button(OrderListActivity.this);
+        TextView btn = new TextView(OrderListActivity.this);
         int btnH = Math.round(getResources().getDimension(R.dimen.btn_height));
         LinearLayout.LayoutParams right = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, btnH);
+        btn.setPadding(5,10,5,0);
         btn.setLayoutParams(right);
-        btn.setBackgroundResource(R.drawable.btn);
-        btn.setText("订单详情");
+        btn.setText("订单详情 >");
+        final long oid = jo.getLong("id");
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(OrderListActivity.this, OrderDetailActivity.class);
+                intent.putExtra("id",oid);
+                startActivity(intent);
+            }
+        });
         bottom.addView(btn);
         h.addView(bottom);
         return h;
     }
-
-
-    private String createStatus(int status){
-        String str = null;
-        switch (status){
-            case 1:str = "未确认";break;
-            case 2:str = "确认";break;
-            case 3:str = "处理中";break;
-            case 4:str = "已发货";break;
-            case 5:str = "确认收货";break;
-            case 6:str = "退货中";break;
-            case 7:str = "退货完成";break;
-        }
-        return str;
-    }
-
-    private String createState(int state){
-        String str = null;
-        switch (state){
-            case 1:str = "正常";break;
-            case 2:str = "取消";break;
-            case 127:str = "异常";break;
-        }
-        return str;
-    }
-
-
 }

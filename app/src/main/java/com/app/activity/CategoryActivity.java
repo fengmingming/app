@@ -56,8 +56,10 @@ public class CategoryActivity extends Activity {
             LinearLayout ll = new LinearLayout(CategoryActivity.this);
             ll.setOrientation(LinearLayout.HORIZONTAL);
             ll.setBackgroundResource(R.drawable.border2);
+            ll.setPadding(5,10,5,10);
             ll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             TextView tv = new TextView(CategoryActivity.this);
+            tv.setTextColor(getResources().getColor(R.color.def_fontcolor));
             tv.setText(jo.getString("fne"));
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,8 +75,9 @@ public class CategoryActivity extends Activity {
                 final LinearLayout second = createCategory2(ja2);
                 final AtomicBoolean isShow = new AtomicBoolean(false);
                 TextView tv2 = new TextView(CategoryActivity.this);
+                tv.setTextColor(getResources().getColor(R.color.def_fontcolor));
                 tv2.setText("∨");
-                tv2.setTextColor(getResources().getColor(R.color.orange));
+                tv2.setTextColor(getResources().getColor(R.color.def_fontcolor));
                 tv2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -112,6 +115,7 @@ public class CategoryActivity extends Activity {
             }
             final com.app.commons.JSONObject jo = ja.getJSONObject(i);
             TextView tv = new TextView(CategoryActivity.this);
+            tv.setTextColor(getResources().getColor(R.color.def_fontcolor));
             tv.setGravity(Gravity.CENTER);
             tv.setText(jo.getString("sne"));
             tv.setOnClickListener(new View.OnClickListener() {

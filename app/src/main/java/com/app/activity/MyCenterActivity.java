@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.MainActivity;
 import com.app.R;
 import com.app.Title;
 import com.app.commons.Constants;
@@ -48,6 +50,47 @@ public class MyCenterActivity extends Activity {
                 Intent intent = new Intent();
                 intent.setClass(MyCenterActivity.this, OrderListActivity.class);
                 startActivity(intent);
+            }
+        });
+        TextView couponBtn = (TextView)findViewById(R.id.couponBtn);
+        couponBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(MyCenterActivity.this, CouponActivity.class);
+                startActivity(intent);
+            }
+        });
+        TextView security = (TextView)findViewById(R.id.security);
+        security.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(MyCenterActivity.this, SecurityActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button unlogin = (Button)findViewById(R.id.unlogin);
+        unlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.asyncHttpRequestGet(Constants.URL_LOGOUT,null,new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
+                        if(statusCode == 200){
+                            com.app.commons.JSONObject jo = new com.app.commons.JSONObject(res);
+                            if(jo.getBoolean("success")){
+                                Intent intent = new Intent();
+                                intent.setClass(MyCenterActivity.this, MainActivity.class );
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(MyCenterActivity.this,jo.getString("errMsg"),Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(MyCenterActivity.this,statusCode,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }

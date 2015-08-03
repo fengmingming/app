@@ -50,7 +50,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/def_fontcolor"
                         android:paddingLeft="10dp"
                         android:id="@+id/my_amount"
                         android:text="0.00" />
@@ -113,6 +113,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/couponBtn"
                 android:gravity="right"
                 android:text=">"/>
         </LinearLayout>
@@ -133,6 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
+                android:id="@+id/security"
                 android:text=">"/>
         </LinearLayout>
         <LinearLayout
@@ -154,5 +156,12 @@
                 android:gravity="right"
                 android:text="4000-365-020"/>
         </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:text="退出"
+            android:background="@drawable/btn_primary"
+            android:id="@+id/unlogin"/>
     </LinearLayout>
 </com.app.commons.ReScrollView>

@@ -105,7 +105,7 @@
                         android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:id="@+id/amount"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/def_fontcolor"
                         android:layout_height="match_parent"/>
                 </LinearLayout>
                 <LinearLayout
@@ -118,7 +118,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/def_fontcolor"
                         android:layout_height="match_parent"
                         android:id="@+id/discountPrice"/>
                 </LinearLayout>
@@ -133,7 +133,7 @@
                         android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:id="@+id/payPrice"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/def_fontcolor"
                         android:layout_height="match_parent"/>
                 </LinearLayout>
             </LinearLayout>
@@ -219,14 +219,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+使用优惠劵"
-                android:textColor="@color/orange"
+                android:textColor="@color/def_fontcolor"
                 android:gravity="left" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:paddingLeft="10dp"
                 android:id="@+id/couponName"
-                android:textColor="@color/orange"
+                android:textColor="@color/def_fontcolor"
                 android:layout_height="wrap_content"
                 />
         </LinearLayout>

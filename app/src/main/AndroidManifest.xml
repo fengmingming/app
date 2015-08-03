@@ -39,5 +39,9 @@
         <activity android:name=".activity.AddAddressActivity"/>
         <activity android:name=".activity.CommitOrderSucActivity"/>
         <activity android:name=".activity.OrderListActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.OrderDetailActivity" android:launchMode="standard"/>
+        <activity android:name=".activity.CouponActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.SecurityActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.ResetPassActivity" android:launchMode="singleTask"/>
     </application>
 </manifest>

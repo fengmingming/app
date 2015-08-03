@@ -143,6 +143,7 @@ public class AddressActivity extends Activity {
         center_top.addView(detail);
         TextView del = new TextView(AddressActivity.this);
         del.setText(getResources().getString(R.string.delete));
+        del.setTextColor(getResources().getColor(R.color.def_fontcolor));
         del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,6 +159,7 @@ public class AddressActivity extends Activity {
         });
         TextView upd = new TextView(AddressActivity.this);
         upd.setText(getResources().getString(R.string.update));
+        upd.setTextColor(getResources().getColor(R.color.def_fontcolor));
         upd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
