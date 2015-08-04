@@ -66,7 +66,6 @@ public class RegisterActivity extends Activity {
         mobile = (EditText) findViewById(R.id.mobile);
         mobileValidCode = (EditText) findViewById(R.id.reg_valid_code);
         imgCode = (EditText) findViewById(R.id.reg_img_code);
-        imgCode.setOnFocusChangeListener(vof);
         reqMobileValid = (Button) findViewById(R.id.reg_valid_code_btn);
         reqMobileValid.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +77,7 @@ public class RegisterActivity extends Activity {
         imgCodeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.asyncLoadInternetImageView(imgCodeBtn, Constants.URL_REQIMGCODE + "?num=" + Math.random());
+                Utils.asyncLoadInternetImageView(imgCodeBtn, Utils.wrapUrl(Constants.URL_REQIMGCODE + "?num=" + Math.random()));
             }
         });
         regBtn = (Button) findViewById(R.id.reg_btn);

@@ -3,6 +3,11 @@ package com.app.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.GoodsFragment;
@@ -25,6 +30,11 @@ import java.util.List;
 public class ListActivity extends Activity {
     private IGoodsCom.Config config = new IGoodsCom.Config();
     private int currPage = 1;
+    private Button sort_def;
+    private Button sort_sales;
+    private TextView sort_price;
+    private ImageView sort_img;
+    private String sortTp;
     private IGoodsCom.ParseJsonToGoods categoryHandler = new IGoodsCom.ParseJsonToGoods() {
         @Override
         public List<GoodsView.Goods> parse(JSONObject json) throws Exception {
@@ -89,20 +99,78 @@ public class ListActivity extends Activity {
                 gf.builder();
             }
         });
+        sort_def = (Button) findViewById(R.id.sort_def);
+        sort_def.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!gf.isLoading()){
+                    clear();
+                    sort_def.setTextColor(getResources().getColor(R.color.def_fontcolor));
+                    gf.reset();
+                    gf.builder();
+                }
+            }
+        });
+        sort_sales = (Button) findViewById(R.id.sort_sales);
+        sort_sales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!gf.isLoading()){
+                    clear();
+                    sort_sales.setTextColor(getResources().getColor(R.color.def_fontcolor));
+                    sortTp = "sort_sale";
+                    config.getParam().put("sortTp",sortTp);
+                    gf.reset();
+                    gf.builder();
+                }
+            }
+        });
+        sort_price = (TextView) findViewById(R.id.sort_price);
+        sort_price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!gf.isLoading()){
+                    if("sort_price_1".equals(sortTp)){
+                        sort_img.setImageResource(R.drawable.sort_up);
+                        sortTp = "sort_price_0";
+                    }else{
+                        clear();
+                        sort_img.setImageResource(R.drawable.sort_down);
+                        sortTp = "sort_price_1";
+                    }
+                    sort_price.setTextColor(getResources().getColor(R.color.def_fontcolor));
+                    config.getParam().put("sortTp",sortTp);
+                    gf.reset();
+                    gf.builder();
+                }
+            }
+        });
+        sort_img = (ImageView) findViewById(R.id.sort_img);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        clear();
+        sort_def.setTextColor(getResources().getColor(R.color.def_fontcolor));
         GoodsFragment gf = (GoodsFragment) getFragmentManager().findFragmentById(R.id.list_goods);
         config.getParam().put("currPage", currPage = 1);
+        gf.reset();
         gf.builder();
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        GoodsFragment gf = (GoodsFragment) getFragmentManager().findFragmentById(R.id.list_goods);
-        gf.reset();
+    }
+
+    private void clear(){
+        sort_def.setTextColor(getResources().getColor(R.color.black));
+        sort_sales.setTextColor(getResources().getColor(R.color.black));
+        sort_price.setTextColor(getResources().getColor(R.color.black));
+        sortTp = null;
+        config.getParam().put("sortTp",null);
+        sort_img.setImageResource(0);
     }
 }

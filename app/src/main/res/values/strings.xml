@@ -55,4 +55,6 @@
     <string name="security">安全中心</string>
     <string name="pass_up_suc">登录密码重置成功</string>
     <string name="resetpass">找回密码</string>
+    <string name="no_mobile">请先绑定手机号</string>
+    <string name="no_validcode">验证码不能为空</string>
 </resources>

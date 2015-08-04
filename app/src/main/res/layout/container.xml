@@ -38,7 +38,7 @@
                         android:layout_gravity="center"
                         android:scaleType="fitCenter"
                         android:background="@color/white"
-                        android:src="@drawable/logo_search"/>
+                        android:src="@drawable/i_search"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

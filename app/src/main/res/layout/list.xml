@@ -6,8 +6,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/list_title_fragment"
-        android:title="商品列表222"
         android:name="com.app.Title"/>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:stretchColumns="0,1,2"
+        android:layout_height="25dp">
+        <TableRow>
+            <Button android:background="@drawable/border" android:text="默认" android:id="@+id/sort_def"/>
+            <Button android:background="@drawable/border" android:text="销量" android:id="@+id/sort_sales"/>
+            <LinearLayout android:orientation="horizontal" android:layout_height="match_parent" android:background="@drawable/border"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="价格"
+                    android:id="@+id/sort_price"
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    android:id="@+id/sort_img"
+                    android:background="@color/white"
+                    />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/list_swipe"
         android:layout_width="match_parent"

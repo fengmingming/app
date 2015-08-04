@@ -136,6 +136,7 @@ public class CartActivtiy extends Activity {
                             llp.setMargins(0,100,0,0);
                             btn.setLayoutParams(llp);
                             btn.setText(getResources().getString(R.string.no_cart_info));
+                            btn.setTextColor(getResources().getColor(R.color.white));
                             btn.setBackgroundResource(R.drawable.btn_primary);
                             btn.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -163,12 +164,14 @@ public class CartActivtiy extends Activity {
         }
         final String productSku = jo.getString("productSku");
         LinearLayout info = new LinearLayout(CartActivtiy.this);
+        int cart_height = Math.round(getResources().getDimension(R.dimen.cart_height));
         info.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        info.setMinimumHeight(cart_height);
         info.setOrientation(LinearLayout.HORIZONTAL);
         info.setGravity(Gravity.CENTER_VERTICAL);
         info.setBackgroundResource(R.drawable.border2);
         final CheckBox rb = new CheckBox(CartActivtiy.this);
-        rb.setPadding(10,0,10,0);
+        rb.setPadding(0,0,10,0);
         rb.setButtonDrawable(R.drawable.checkbox);
         if(jo.getBoolean("checked")){
             rb.setChecked(true);
@@ -207,6 +210,7 @@ public class CartActivtiy extends Activity {
         center.setOrientation(LinearLayout.VERTICAL);
         center.setLayoutParams(centerLP);
         center.setPadding(10,0,0,0);
+        int wh2 = Math.round(getResources().getDimension(R.dimen.btn_cart_height));
         if(ja != null && ja.length() > 0){
             ImageView iv = new ImageView(CartActivtiy.this);
             int wh = Math.round(getResources().getDimension(R.dimen.cart_img_wh));
@@ -225,15 +229,14 @@ public class CartActivtiy extends Activity {
             bottom.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             bottom.setOrientation(LinearLayout.HORIZONTAL);
             bottom.setPadding(0,15,0,0);
-            LinearLayout.LayoutParams wrap = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            wrap.setMargins(0,0,0,0);
+            LinearLayout.LayoutParams wrap = new LinearLayout.LayoutParams(wh2, wh2);
+            wrap.setMargins(5,0,5,0);
             final EditText et = new EditText(CartActivtiy.this);
             et.setBackgroundResource(R.drawable.wrapcontent);
             et.setText(jo.getString("number"));
             et.setSingleLine(true);
             et.setKeyListener(new DigitsKeyListener(false,false));
-            et.setMaxWidth(50);
-            et.setMinWidth(50);
+            et.setLayoutParams(wrap);
             et.setGravity(Gravity.RIGHT);
             et.setPadding(5,2,5,2);
             et.setFocusable(true);
@@ -278,12 +281,10 @@ public class CartActivtiy extends Activity {
                     });
                 }
             });
-
-            Button sub = new Button(CartActivtiy.this, null, R.style.wrapcontent);
-            sub.setBackgroundResource(R.drawable.wrapcontent);
-            sub.setText("-");
-            sub.setPadding(30,2,30,2);
+            ImageView sub = new ImageView(CartActivtiy.this);
+            sub.setScaleType(ImageView.ScaleType.FIT_CENTER);
             sub.setLayoutParams(wrap);
+            sub.setImageResource(R.drawable.cart_sub);
             sub.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -293,11 +294,10 @@ public class CartActivtiy extends Activity {
                     }
                 }
             });
-            Button add = new Button(CartActivtiy.this, null, R.style.wrapcontent);
-            add.setBackgroundResource(R.drawable.wrapcontent);
-            add.setText("+");
-            add.setPadding(30,2,30,2);
+            ImageView add = new ImageView(CartActivtiy.this);
             add.setLayoutParams(wrap);
+            add.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            add.setImageResource(R.drawable.cart_add);
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -328,11 +328,11 @@ public class CartActivtiy extends Activity {
         tv2.setTextColor(getResources().getColor(R.color.red));
         right.addView(tv2);
         ImageButton ib = new ImageButton(CartActivtiy.this);
-        LinearLayout.LayoutParams ibLP = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams ibLP = new LinearLayout.LayoutParams(wh2, wh2);
         ibLP.gravity = Gravity.RIGHT;
         ibLP.setMargins(0,0,0,0);
         ib.setLayoutParams(ibLP);
-        ib.setScaleType(ImageView.ScaleType.FIT_XY);
+        ib.setScaleType(ImageView.ScaleType.FIT_CENTER);
         ib.setBackgroundResource(R.drawable.border3);
         ib.setPadding(0,0,0,0);
         ib.setImageResource(R.drawable.cart_delete);

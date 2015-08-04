@@ -126,6 +126,10 @@ public class CouponActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        curBtn = 1;
+        clear();
+        nouse.setTextColor(getResources().getColor(R.color.def_fontcolor));
+        flush();
     }
 
     private void clear(){

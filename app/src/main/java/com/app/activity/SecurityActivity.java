@@ -80,7 +80,7 @@ public class SecurityActivity extends Activity {
             @Override
             public void onClick(View view) {
                 CharSequence mobile = SecurityActivity.this.mobile.getText();
-                if(mobile==null||!mobile.toString().trim().matches("")){
+                if(mobile==null||!mobile.toString().trim().matches("^1[0-9]{10}")){
                     Toast.makeText(SecurityActivity.this,getResources().getString(R.string.mobile_regex_err),Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -113,6 +113,10 @@ public class SecurityActivity extends Activity {
         sm2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!isExistMobile){
+                    Toast.makeText(SecurityActivity.this, getResources().getString(R.string.no_mobile),Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Utils.asyncHttpRequestPost(Constants.URL_SENDMCTOUM,null,new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
@@ -145,6 +149,10 @@ public class SecurityActivity extends Activity {
                     Toast.makeText(SecurityActivity.this,getResources().getString(R.string.mobile_regex_err),Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if("".equals(code.getText().toString().trim())){
+                    Toast.makeText(SecurityActivity.this,getResources().getString(R.string.no_validcode),Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Map<String,Object> param = new HashMap<String, Object>();
                 param.put("mobile",mobile.toString().trim());
                 param.put("code", code.getText().toString());
@@ -169,15 +177,23 @@ public class SecurityActivity extends Activity {
         save2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!isExistMobile){
+                    Toast.makeText(SecurityActivity.this, getResources().getString(R.string.no_mobile),Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String pass = payPass.getText().toString();
                 if(pass.length() < 6||pass.length() > 11){
                     Toast.makeText(SecurityActivity.this,getResources().getString(R.string.pass_regex_err),Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if("".equals(code2.getText().toString().trim())){
+                    Toast.makeText(SecurityActivity.this,getResources().getString(R.string.no_validcode),Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 pass = Utils.md5(pass.trim());
                 Map<String,Object> param = new HashMap<String, Object>();
-                param.put("pss",pass);
-                param.put("code", code.getText().toString());
+                param.put("pass",pass);
+                param.put("code", code2.getText().toString());
                 Utils.asyncHttpRequestPost(Constants.URL_PAYPASS,param,new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject res) {
