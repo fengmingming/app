@@ -3,6 +3,7 @@ package com.app.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,7 +31,7 @@ import java.util.Map;
 /**
  * Created by developserver on 2015/8/1.
  */
-public class OrderDetailActivity extends Activity {
+public class OrderDetailActivity extends FragmentActivity {
     private LinearLayout container;
     private TextView orderNum;
     private TextView state;
@@ -47,7 +48,7 @@ public class OrderDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.odetail);
-        Title title = (Title) getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title) getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.title_orders_detail));
         container = (LinearLayout)findViewById(R.id.container);
         orderNum = (TextView)findViewById(R.id.orderNum);

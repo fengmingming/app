@@ -1,9 +1,9 @@
 package com.app.activity;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Created by developserver on 2015/7/22.
  */
-public class CategoryActivity extends Activity {
+public class CategoryActivity extends FragmentActivity {
     private LinearLayout container;
 
     @Override
@@ -35,7 +35,7 @@ public class CategoryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category);
         container = (LinearLayout) findViewById(R.id.container);
-        Title title = (Title) getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title) getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.category_title));
         Utils.asyncHttpRequestGet(Constants.URL_CATEGORY_JSON, null, new JsonHttpResponseHandler() {
             @Override

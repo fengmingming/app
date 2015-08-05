@@ -129,6 +129,6 @@ public class Utils {
     }
 
     public static void pay(Context context, int payType){
-
+        Toast.makeText(context,"测试版本未开通支付通道",Toast.LENGTH_SHORT).show();
     }
 }

@@ -22,7 +22,7 @@
                 android:orientation="vertical">
                 <android.support.v4.view.ViewPager
                     android:layout_width="match_parent"
-                    android:layout_height="189dp"
+                    android:layout_height="350dp"
                     android:id="@+id/gd_photo_vp">
                 </android.support.v4.view.ViewPager>
                 <LinearLayout

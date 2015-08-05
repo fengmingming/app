@@ -1,13 +1,11 @@
 package com.app.activity;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +39,7 @@ import java.util.Map;
 /**
  * Created by on 2015/7/24.
  */
-public class CartActivtiy extends Activity {
+public class CartActivtiy extends FragmentActivity {
 
     private int settleNum = 0;
     private final int def_num = 1;
@@ -57,7 +55,7 @@ public class CartActivtiy extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart);
-        Title title = (Title) getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title) getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.cart_info));
         container = (LinearLayout) findViewById(R.id.container);
         settle = (Button) findViewById(R.id.settle);
@@ -170,6 +168,7 @@ public class CartActivtiy extends Activity {
         info.setOrientation(LinearLayout.HORIZONTAL);
         info.setGravity(Gravity.CENTER_VERTICAL);
         info.setBackgroundResource(R.drawable.border2);
+        info.setPadding(10,0,10,0);
         final CheckBox rb = new CheckBox(CartActivtiy.this);
         rb.setPadding(0,0,10,0);
         rb.setButtonDrawable(R.drawable.checkbox);
@@ -226,7 +225,7 @@ public class CartActivtiy extends Activity {
             }
             center.addView(tv);
             LinearLayout bottom = new LinearLayout(CartActivtiy.this);
-            bottom.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            bottom.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             bottom.setOrientation(LinearLayout.HORIZONTAL);
             bottom.setPadding(0,15,0,0);
             LinearLayout.LayoutParams wrap = new LinearLayout.LayoutParams(wh2, wh2);
@@ -318,23 +317,20 @@ public class CartActivtiy extends Activity {
         }
         LinearLayout right = new LinearLayout(CartActivtiy.this);
         right.setOrientation(LinearLayout.VERTICAL);
-        right.setGravity(Gravity.CENTER_VERTICAL);
-        right.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        right.setGravity(Gravity.CENTER);
+        right.setPadding(0,0,0,5);
         TextView tv2 = new TextView(CartActivtiy.this);
-        LinearLayout.LayoutParams bottom = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        bottom.gravity = Gravity.BOTTOM;
-        tv2.setLayoutParams(bottom);
+        tv2.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        tv2.setGravity(Gravity.CENTER);
         tv2.setText("￥"+jo.getString("amount"));
         tv2.setTextColor(getResources().getColor(R.color.red));
         right.addView(tv2);
         ImageButton ib = new ImageButton(CartActivtiy.this);
-        LinearLayout.LayoutParams ibLP = new LinearLayout.LayoutParams(wh2, wh2);
-        ibLP.gravity = Gravity.RIGHT;
-        ibLP.setMargins(0,0,0,0);
-        ib.setLayoutParams(ibLP);
+        int cdelw = Math.round(getResources().getDimension(R.dimen.cart_delete_width));
+        int cdelh = Math.round(getResources().getDimension(R.dimen.cart_delete_height));
+        ib.setLayoutParams(new ViewGroup.LayoutParams(cdelw, cdelh));
         ib.setScaleType(ImageView.ScaleType.FIT_CENTER);
         ib.setBackgroundResource(R.drawable.border3);
-        ib.setPadding(0,0,0,0);
         ib.setImageResource(R.drawable.cart_delete);
         ib.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,9 +5,9 @@ package com.app.commons;
  */
 public class Constants {
     public static final String KEY = "app-token";
-    public static final String HOST = "http://app.365020.com/app-client";
+    public static final String HOST = "http://m.365020.com/app-client";
     public static final String URL_INDEX_FLOOR = HOST + "/goods/getOEMAjax.htm";
-    public static final String URL_IMAGE = "http://img.app.365020.com";
+    public static final String URL_IMAGE = "http://img.365020.com";
     public static final String URL_INDEX_LOOP = HOST + "/index.htm";
     /**
      * 分类页面

@@ -1,7 +1,7 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * Created by on 2015/8/2.
  */
-public class SecurityActivity extends Activity {
+public class SecurityActivity extends FragmentActivity {
     private EditText mobile;
     private EditText payPass;
     private EditText code;
@@ -42,7 +42,7 @@ public class SecurityActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.security);
-        Title title = (Title) getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title) getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.security));
         mobile = (EditText) findViewById(R.id.mobile);
         payPass = (EditText) findViewById(R.id.payPass);

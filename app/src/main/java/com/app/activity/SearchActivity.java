@@ -1,7 +1,7 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by developserver on 2015/7/23.
  */
-public class SearchActivity extends Activity {
+public class SearchActivity extends FragmentActivity{
     private int currPage = 1;
     private GoodsFragment gf;
     private EditText text;
@@ -70,13 +70,13 @@ public class SearchActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
-        gf = (GoodsFragment)getFragmentManager().findFragmentById(R.id.container);
+        gf = (GoodsFragment)getSupportFragmentManager().findFragmentById(R.id.container);
         gf.parseJsonToGoods(handler);
         gf.setConfig(config);
         config.setUrl(Constants.URL_SEARCH);
         text = (EditText) findViewById(R.id.search);
         tip = (TextView) findViewById(R.id.tip);
-        Title title = (Title) getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title) getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.search));
         final TextView et = (TextView) findViewById(R.id.sbtn);
         et.setOnClickListener(new View.OnClickListener() {

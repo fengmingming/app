@@ -1,7 +1,7 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * Created by developserver on 2015/7/30.
  */
-public class AddAddressActivity extends Activity {
+public class AddAddressActivity extends FragmentActivity {
     private Long addressId;
     private Spinner province;
     private Spinner city;

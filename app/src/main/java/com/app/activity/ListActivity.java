@@ -1,12 +1,11 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +26,7 @@ import java.util.List;
 /**
  * Created by on 2015/7/15.
  */
-public class ListActivity extends Activity {
+public class ListActivity extends FragmentActivity{
     private IGoodsCom.Config config = new IGoodsCom.Config();
     private int currPage = 1;
     private Button sort_def;
@@ -72,10 +71,10 @@ public class ListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list);
-        Title title = (Title)getFragmentManager().findFragmentById(R.id.list_title_fragment);
+        Title title = (Title)getSupportFragmentManager().findFragmentById(R.id.list_title_fragment);
         String tStr = getIntent().getStringExtra("title");
         title.setTitle(tStr == null?getResources().getString(R.string.list_title):tStr);
-        final GoodsFragment gf = (GoodsFragment) getFragmentManager().findFragmentById(R.id.list_goods);
+        final GoodsFragment gf = (GoodsFragment) getSupportFragmentManager().findFragmentById(R.id.list_goods);
         gf.setConfig(config);
         config.setUrl(getIntent().getStringExtra("url"));
         if(config.getUrl().startsWith(Constants.URL_CATEGORY_GOODS_LIST)){
@@ -153,7 +152,7 @@ public class ListActivity extends Activity {
         super.onStart();
         clear();
         sort_def.setTextColor(getResources().getColor(R.color.def_fontcolor));
-        GoodsFragment gf = (GoodsFragment) getFragmentManager().findFragmentById(R.id.list_goods);
+        GoodsFragment gf = (GoodsFragment) getSupportFragmentManager().findFragmentById(R.id.list_goods);
         config.getParam().put("currPage", currPage = 1);
         gf.reset();
         gf.builder();

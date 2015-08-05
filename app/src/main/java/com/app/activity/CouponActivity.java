@@ -1,14 +1,11 @@
 package com.app.activity;
 
-import android.app.Activity;
-import android.media.Rating;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +28,7 @@ import java.util.Map;
 /**
  * Created by developserver on 2015/8/1.
  */
-public class CouponActivity extends Activity {
+public class CouponActivity extends FragmentActivity {
     private int curBtn = 1;
     private int curPage = 0;
     private int rows = 10;
@@ -49,7 +46,7 @@ public class CouponActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.coupon);
-        Title title = (Title)getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title)getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.coupon));
         nouse = (Button) findViewById(R.id.nouse);
         nouse.setOnClickListener(new View.OnClickListener() {

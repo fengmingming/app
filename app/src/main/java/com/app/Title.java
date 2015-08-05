@@ -1,10 +1,9 @@
 package com.app;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.INotificationSideChannel;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,7 @@ public class Title extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.title, container, false);
-        this.navigation = (BottomFragment) getFragmentManager().findFragmentById(R.id.navigation);
+        this.navigation = (BottomFragment)getChildFragmentManager().findFragmentById(R.id.navigation);
         ImageView title_right = (ImageView) view.findViewById(R.id.title_right);
         title_right.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +52,7 @@ public class Title extends Fragment {
                 navigation.toggle();
             }
         });
-        final Activity activity = this.getActivity();
+        final FragmentActivity activity = this.getActivity();
         ImageView back = (ImageView) view.findViewById(R.id.title_left);
         back.setOnClickListener(new View.OnClickListener() {
             @Override

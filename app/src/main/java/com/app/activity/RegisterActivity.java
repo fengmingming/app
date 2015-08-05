@@ -1,10 +1,8 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +25,7 @@ import java.util.Map;
 /**
  * Created by developserver on 2015/7/28.
  */
-public class RegisterActivity extends Activity {
+public class RegisterActivity extends FragmentActivity {
     private EditText username;
     private EditText password;
     private EditText mobile;
@@ -55,7 +53,7 @@ public class RegisterActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-        Title title = (Title) getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title) getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.register));
         username = (EditText) findViewById(R.id.username);
         username.setOnFocusChangeListener(vof);

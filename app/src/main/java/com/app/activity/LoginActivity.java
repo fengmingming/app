@@ -1,9 +1,8 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,20 +19,19 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by on 2015/7/28.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        Title title = (Title)getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title)getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.login));
         String clazz = getIntent().getStringExtra("clazz");
         final Intent intent = new Intent();

@@ -10,12 +10,13 @@ import java.io.RandomAccessFile;
 import java.util.UUID;
 
 public class Installation {
+    private static String path = null;
     private static String sID = null;
     private static final String INSTALLATION = "com_sls_installation";
 
     public synchronized static String id() {
         if (sID == null) {
-            File installation = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), INSTALLATION);
+            File installation = new File(path, INSTALLATION);
             try {
                 if (!installation.exists())
                     writeInstallationFile(installation);
@@ -42,5 +43,9 @@ public class Installation {
         String id = UUID.randomUUID().toString();
         out.write(id.getBytes());
         out.close();
+    }
+
+    public static void setAPPPath(String path){
+        Installation.path = path;
     }
 }

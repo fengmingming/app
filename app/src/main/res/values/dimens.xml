@@ -8,7 +8,7 @@
     <dimen name="default_padding">5dp</dimen>
     <dimen name="img_l">35dp</dimen>
     <dimen name="marginleft_index2">26dp</dimen>
-    <dimen name="index_loop_height">298px</dimen>
+    <dimen name="index_loop_height">160dp</dimen>
     <dimen name="goods_width">50dp</dimen>
     <dimen name="goods_height">50dp</dimen>
     <dimen name="btn_sm_width">5dp</dimen>
@@ -17,5 +17,8 @@
     <dimen name="btn_cart_height">25dp</dimen>
     <dimen name="couponfont">30dp</dimen>
     <dimen name="couponname">20dp</dimen>
-    <dimen name="cart_height">60dp</dimen>
+    <dimen name="cart_height">80dp</dimen>
+    <dimen name="def_height">40dp</dimen>
+    <dimen name="cart_delete_height">50dp</dimen>
+    <dimen name="cart_delete_width">50dp</dimen>
 </resources>

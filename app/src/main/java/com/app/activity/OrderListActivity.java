@@ -3,6 +3,7 @@ package com.app.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ import java.util.Map;
 /**
  * Created by on 2015/7/31.
  */
-public class OrderListActivity extends Activity {
+public class OrderListActivity extends FragmentActivity {
 
     private Button ispaid1;
     private Button ostatus4;
@@ -47,7 +48,7 @@ public class OrderListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orders);
-        Title title = (Title)getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title)getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.title_orders));
         ispaid1 = (Button) findViewById(R.id.ispaid1);
         ispaid1.setOnClickListener(new View.OnClickListener() {

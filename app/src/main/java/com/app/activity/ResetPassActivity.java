@@ -1,7 +1,7 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,13 +22,13 @@ import java.util.Map;
 /**
  * Created by developserver on 2015/8/3.
  */
-public class ResetPassActivity extends Activity {
+public class ResetPassActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resetpass);
-        Title title = (Title)getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title)getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.resetpass));
         final EditText m = (EditText) findViewById(R.id.mobile);
         final EditText password = (EditText) findViewById(R.id.password);

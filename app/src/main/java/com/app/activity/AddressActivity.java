@@ -1,9 +1,8 @@
 package com.app.activity;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,7 @@ import java.util.Map;
 /**
  * Created by on 2015/7/29.
  */
-public class AddressActivity extends Activity {
+public class AddressActivity extends FragmentActivity {
     private LinearLayout container;
     private Button addBtn;
 
@@ -48,7 +47,7 @@ public class AddressActivity extends Activity {
                 startActivity(intent);
             }
         });
-        Title title = (Title) getFragmentManager().findFragmentById(R.id.title);
+        Title title = (Title) getSupportFragmentManager().findFragmentById(R.id.title);
         title.setTitle(getResources().getString(R.string.address));
     }
 

@@ -1,22 +1,20 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +39,7 @@ import com.app.commons.JSONArray;
 /**
  * Created by developserver on 2015/7/17.
  */
-public class GoodsDetailActivity extends Activity {
+public class GoodsDetailActivity extends FragmentActivity {
     private Long goodsId;
     private volatile int number = 1;
 
@@ -49,6 +47,8 @@ public class GoodsDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gdetail);
+        Title title = (Title) getSupportFragmentManager().findFragmentById(R.id.gdetail_title);
+        title.setTitle(getResources().getString(R.string.goodsdetail));
         ImageButton skipCart = (ImageButton)findViewById(R.id.cartBtn);
         skipCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,8 +201,6 @@ public class GoodsDetailActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        Title title = (Title) getFragmentManager().findFragmentById(R.id.gdetail_title);
-        title.setTitle(getResources().getString(R.string.goodsdetail));
     }
 
     private void addCart(){

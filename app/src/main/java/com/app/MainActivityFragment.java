@@ -1,35 +1,29 @@
 package com.app;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.app.activity.CartActivtiy;
 import com.app.activity.CategoryActivity;
-import com.app.activity.CommitOrderActivity;
-import com.app.activity.ListActivity;
 import com.app.activity.LoginActivity;
 import com.app.activity.MyCenterActivity;
 import com.app.activity.SearchActivity;
-import com.app.activity.WebActivity;
 import com.app.adapter.LoopImgsAdapter;
 import com.app.commons.Constants;
 import com.app.commons.ReScrollView;
 import com.app.commons.Utils;
 import com.app.interfaces.IGoodsCom;
 import com.app.view.GoodsView;
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -37,11 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -61,7 +51,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.container, container, false);
         //分页加载
-        final GoodsFragment gf = (GoodsFragment)getFragmentManager().findFragmentById(R.id.index_goods);
+        final GoodsFragment gf = (GoodsFragment)getChildFragmentManager().findFragmentById(R.id.index_goods);
         gf.setConfig(config);
         gf.parseJsonToGoods(new IGoodsCom.ParseJsonToGoods() {
             @Override
@@ -221,15 +211,14 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        final GoodsFragment gf = (GoodsFragment)getFragmentManager().findFragmentById(R.id.index_goods);
+        final GoodsFragment gf = (GoodsFragment)getChildFragmentManager().findFragmentById(R.id.index_goods);
         gf.getConfig().getParam().put("curPage", currPage = 1);
+        gf.reset();
         gf.builder();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        final GoodsFragment gf = (GoodsFragment)getFragmentManager().findFragmentById(R.id.index_goods);
-        gf.reset();
     }
 }
