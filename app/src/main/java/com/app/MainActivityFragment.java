@@ -168,6 +168,7 @@ public class MainActivityFragment extends Fragment {
                 });
             }
         });
+        gf.builder();
         return view;
     }
 
@@ -208,17 +209,4 @@ public class MainActivityFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        final GoodsFragment gf = (GoodsFragment)getChildFragmentManager().findFragmentById(R.id.index_goods);
-        gf.getConfig().getParam().put("curPage", currPage = 1);
-        gf.reset();
-        gf.builder();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
 }
